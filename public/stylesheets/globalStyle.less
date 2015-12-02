@@ -1,0 +1,28 @@
+@general-color: #1E88E5;
+
+body {
+	font-weight: 500;
+	display: flex;
+	min-height: 100vh;
+	flex-direction: column;
+}
+
+main {
+	flex: 1 0 auto;
+}
+
+.navbar.navbar-default {
+	background-color: @general-color;
+}
+
+.navbar {
+	margin-bottom: 0;
+}
+
+.navbar.navbar-default .dropdown-menu>li>a:hover {
+	color: @general-color;
+}
+
+.dropdown-menu {
+	padding: 0 0;
+}
