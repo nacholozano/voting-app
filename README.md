@@ -2,7 +2,8 @@
 
 MEAN Stack App
 
-MongoDB (Mongoose)
-Express JS
-Angular JS
-Node JS
+MongoDB (Mongoose) <br>
+Express JS <br>
+Angular JS <br>
+Node JS <br>
+LESS
