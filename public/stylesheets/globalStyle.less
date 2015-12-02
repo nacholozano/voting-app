@@ -1,15 +1,45 @@
+/* Vars */
+
 @general-color: #1E88E5;
+
+/* Mixins */
+
+#padding() {
+	padding: 30px 8%;
+}
+
+#button-style() {
+	background-color: @general-color;
+	color: white;
+	&:hover {
+		background-color: @general-color - 20;
+	}
+	&:focus {
+		background-color: @general-color;
+	}
+	&:active {
+		background-color: @general-color - 40;
+	}
+}
+
+
+/* Global */
 
 body {
 	font-weight: 500;
 	display: flex;
 	min-height: 100vh;
 	flex-direction: column;
+	font-family: 'Lato';
 }
 
 main {
 	flex: 1 0 auto;
+	padding: 0;
 }
+
+
+/* Header */
 
 .navbar.navbar-default {
 	background-color: @general-color;
@@ -25,4 +55,65 @@ main {
 
 .dropdown-menu {
 	padding: 0 0;
+}
+
+
+/* Welcome Home */
+
+.welcome {
+	padding: 30px 0 20px;
+	text-align: center;
+	background-color: #76b6ef;
+	h1 {
+		font-size: 500;
+	}
+	p {
+		margin: 30px 5%;
+		font-size: 1.7rem;
+		line-height: 35px;
+	}
+}
+
+.button-div {
+	text-align: center;
+	margin: 80px 0;
+	width: 100%;
+	.btn.btn-lg {
+		padding: 25px 50px;
+	}
+}
+
+
+/* Register */
+
+.register,.login,.settings {
+	#padding;
+	.container {
+		width: 100%;
+		.btn.btn-lg {
+			#button-style;
+			margin-top: 30px;
+		}
+	}
+}
+
+
+/* Styling inputs */
+
+.form-control,
+.form-group .form-control {
+	background-image: linear-gradient(@general-color, @general-color), linear-gradient(black, black);
+}
+
+.form-group label.control-label {
+	color: black;
+}
+
+.form-group.is-focused label,
+.form-group.is-focused label.control-label {
+	color: @general-color;
+}
+
+.form-group.is-focused .form-control {
+	background-image: linear-gradient(@general-color, @general-color), linear-gradient(black, black);
 }
