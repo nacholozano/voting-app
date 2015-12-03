@@ -77,9 +77,11 @@ main {
 	}
 }
 
-/* Register */
+/* Register, Login, Settings */
 
-.register,.login,.settings {
+/* polls included */
+
+.register,.login,.settings,.polls{
 	#padding;
 	.container {
 		width: 100%;
@@ -109,4 +111,16 @@ main {
 
 .form-group.is-focused .form-control {
 	background-image: linear-gradient(@general-color, @general-color), linear-gradient(black, black);
+}
+
+
+/* Polls */
+
+.polls {
+	.table{
+		margin: 50px 0;
+	}
+	.search{
+		margin-top: 30px;
+	}
 }
