@@ -1,12 +1,12 @@
 /* Vars */
 
 @general-color: #1E88E5;
+
+/* Mixins */
+
 .actived {
 	background-color: rgba(153, 153, 153, .2);
 }
-
-
-/* Mixins */
 
 #padding() {
 	padding: 30px 8%;
@@ -21,6 +21,64 @@
 	&:hover {
 		background-color: @general-color - 20;
 	}
+	&:focus {
+		background-color: @general-color - 20;
+	}
+}
+
+
+/* FADE IN */
+
+@-webkit-keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+@-moz-keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+@-o-keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+@keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+body,
+.settings,
+.register,
+.home,
+.login,
+.dashboard {
+	-webkit-animation: fadeIn 0.88s infinite;
+	-moz-animation: fadeIn 0.88s infinite;
+	-o-animation: fadeIn 0.88s infinite;
+	animation: fadeIn 0.88s infinite;
+	-webkit-animation-iteration-count: 1;
+	-moz-animation-iteration-count: 1;
+	-o-animation-iteration-count: 1;
+	animation-iteration-count: 1;
 }
 
 
@@ -80,12 +138,12 @@ main {
 }
 
 
-/* Register, Login, Settings, Dashboard */
+/* Styling buttons */
 
 .register,
 .login,
 .settings,
-.dashboard{
+.dashboard {
 	#padding;
 	.container {
 		.btn.btn-lg {
@@ -126,10 +184,16 @@ main {
 .polls {
 	#padding;
 	.table {
-		margin: 50px 0;
+		margin: 40px 0;
 	}
 	.search {
-		margin-top: 30px;
+		margin-top: 10px;
+	}
+	table+.btn.btn-lg {
+		#button-style;
+	}
+	.container {
+		padding-bottom: 35px;
 	}
 }
 
@@ -141,9 +205,18 @@ main {
 		margin-top: 50px;
 	}
 	.content {
-		padding: 35px 0;
+		padding: 17px 0 35px;
 	}
-	#newPoll>form>p {
-		margin-top: 22px;
+	#newPoll>form {
+		.checkbox .privatePoll {
+			margin-left: 20px;
+			color: black;
+		}
+		p {
+			margin-top: 22px;
+		}
+	}
+	#myPolls {
+		margin-top: 30px;
 	}
 }

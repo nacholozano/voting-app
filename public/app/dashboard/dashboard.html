@@ -11,6 +11,8 @@
 
 		<div class="content">
 
+			<!-- New poll -->
+
 			<section id="newPoll" ng-show='isSet("newPoll")'>
 
 				<form>
@@ -19,13 +21,19 @@
 						<input type="text" class="form-control" id="namePoll" name="namePoll">
 					</div>
 
+					<div class="checkbox">
+						<label>
+							<input type="checkbox"> <span class="privatePoll">Make this poll private</span>
+						</label>
+					</div>
+
 					<p>Options</p>
 
 					<div class="form-group">
 						<input class="form-control" type="text" id="inputSmall" placeholder="Option">
 					</div>
 					<div class="form-group">
-						<input class="form-control" type="text" id="inputSmall" placeholder="Option">
+						<input class="form-control" type="text" id="inputSmall" placeholder="Option ">
 					</div>
 
 					<a href="#" class="btn btn-lg">New option</a>
@@ -35,8 +43,28 @@
 
 			</section>
 
-			<section id="myPolls" ng-show='isSet("myPolls")'>
+			<!-- My polls -->
 
+			<section id="myPolls" ng-show='isSet("myPolls")'>
+				<div class="table-responsive">
+					<table class="table table-striped table-hover">
+						<thead>
+							<tr>
+								<th>Column heading</th>
+								<th>Column heading</th>
+								<th>Column heading</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+
+								<td>Poll name</td>
+								<td></td>
+								<td>Delete</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
 			</section>
 
 		</div>
