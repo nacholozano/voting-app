@@ -1,11 +1,18 @@
 /* Vars */
 
 @general-color: #1E88E5;
+.actived {
+	background-color: rgba(153, 153, 153, .2);
+}
+
 
 /* Mixins */
 
 #padding() {
 	padding: 30px 8%;
+	.container {
+		width: 100%;
+	}
 }
 
 #button-style() {
@@ -13,12 +20,6 @@
 	color: white;
 	&:hover {
 		background-color: @general-color - 20;
-	}
-	&:focus {
-		background-color: @general-color;
-	}
-	&:active {
-		background-color: @general-color - 40;
 	}
 }
 
@@ -31,6 +32,7 @@ body {
 	min-height: 100vh;
 	flex-direction: column;
 	font-family: 'Lato';
+	color: black;
 }
 
 main {
@@ -62,12 +64,12 @@ main {
 
 .welcome {
 	text-align: center;
-	.container-fluid{
+	.container-fluid {
 		background-color: #76b6ef;
 		padding: 70px 0;
-		p{
-	  	margin: 30px 0 10px;
-    	font-size: 2rem;
+		p {
+			margin: 30px 0 10px;
+			font-size: 2rem;
 		}
 	}
 	.btn.btn-lg {
@@ -77,17 +79,18 @@ main {
 	}
 }
 
-/* Register, Login, Settings */
 
-/* polls included */
+/* Register, Login, Settings, Dashboard */
 
-.register,.login,.settings,.polls{
+.register,
+.login,
+.settings,
+.dashboard{
 	#padding;
 	.container {
-		width: 100%;
 		.btn.btn-lg {
 			#button-style;
-			margin-top: 30px;
+			margin-top: 40px;
 		}
 	}
 }
@@ -113,14 +116,34 @@ main {
 	background-image: linear-gradient(@general-color, @general-color), linear-gradient(black, black);
 }
 
+.form-group.form-group-sm label.control-label {
+	color: black;
+}
+
 
 /* Polls */
 
 .polls {
-	.table{
+	#padding;
+	.table {
 		margin: 50px 0;
 	}
-	.search{
+	.search {
 		margin-top: 30px;
+	}
+}
+
+
+/* Dashboard */
+
+.dashboard {
+	h2+.btn-group {
+		margin-top: 50px;
+	}
+	.content {
+		padding: 35px 0;
+	}
+	#newPoll>form>p {
+		margin-top: 22px;
 	}
 }

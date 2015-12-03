@@ -1,0 +1,46 @@
+<div class="dashboard">
+
+	<div class="container" ng-controller='tabController as tab'>
+
+		<h2>Dashboard</h2>
+
+		<div class="btn-group btn-group-justified btn-group-raised">
+			<a href="" class="btn" ng-click='setTab("newPoll")' ng-class="{ actived:isSet('newPoll') }">New poll</a>
+			<a href="" class="btn" ng-click='setTab("myPolls")' ng-class="{ actived:isSet('myPolls') }">My polls</a>
+		</div>
+
+		<div class="content">
+
+			<section id="newPoll" ng-show='isSet("newPoll")'>
+
+				<form>
+					<div class="form-group">
+						<label class="control-label" for="namePoll">Name your poll</label>
+						<input type="text" class="form-control" id="namePoll" name="namePoll">
+					</div>
+
+					<p>Options</p>
+
+					<div class="form-group">
+						<input class="form-control" type="text" id="inputSmall" placeholder="Option">
+					</div>
+					<div class="form-group">
+						<input class="form-control" type="text" id="inputSmall" placeholder="Option">
+					</div>
+
+					<a href="#" class="btn btn-lg">New option</a>
+					<a href="#" class="btn btn-lg">Submit</a>
+
+				</form>
+
+			</section>
+
+			<section id="myPolls" ng-show='isSet("myPolls")'>
+
+			</section>
+
+		</div>
+
+	</div>
+
+</div>

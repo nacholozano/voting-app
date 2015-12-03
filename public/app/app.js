@@ -33,6 +33,12 @@ app.config([
 				//controller: 'HomeCtrl',
 
 			})
+			.state('dashboard', {
+				url: '/dashboard',
+				templateUrl: 'app/dashboard/dashboard.html',
+				//controller: 'HomeCtrl',
+
+			})
 		;
 
 		$urlRouterProvider.otherwise('home');
