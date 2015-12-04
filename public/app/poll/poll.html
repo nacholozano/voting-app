@@ -1,16 +1,70 @@
-<div class="poll fadeIn">
+<div class="poll">
 
 	<div class="container">
 
 		<h2>Poll name</h2>
 
-		<section>
+		<section class="vote hide">
 
-			<p>votos de cada opcion</p>
-			<p>votos de cada opcion</p>
-			<p>votos de cada opcion</p>
+			<form>
+				<div class="form-group">
+
+					<div class="radio ">
+						<label>
+							<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked=''> Option one is this
+						</label>
+					</div>
+					<div class="radio">
+						<label>
+							<input type="radio" name="optionsRadios" id="optionsRadios2" value="option2"> Option one is this
+						</label>
+					</div>
+
+				</div>
+
+				<a href="#" class="btn btn-lg">Submit</a>
+
+			</form>
 
 		</section>
+
+		<section class="info">
+
+			<section class="primary">
+				<p>Winner: <span>Option X</span> </p>
+				<p> Total votes: <span>456</span> </p>
+			</section>
+
+			<section class="percent">
+				<p>Percents</p>
+
+				<div>
+					<p>option 1</p>
+					<div class="progress">
+						<div class="progress-bar" style="width: 60%;"></div>
+					</div>
+
+				</div>
+				<div>
+					<p>option 1</p>
+					<div class="progress">
+						<div class="progress-bar" style="width: 60%;"></div>
+					</div>
+
+				</div>
+				<div>
+					<p>option 1</p>
+					<div class="progress">
+						<div class="progress-bar" style="width: 60%;"></div>
+					</div>
+
+				</div>
+
+			</section>
+
+		</section>
+
+		<a href="#" class="btn btn-lg">Delete</a>
 
 	</div>
 

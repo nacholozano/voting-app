@@ -27,6 +27,9 @@
 }
 
 
+/* Keyframes */
+
+
 /* FADE IN */
 
 @-webkit-keyframes fadeIn {
@@ -137,9 +140,34 @@ main {
 	}
 }
 
+/* Polls */
 
-/* Styling buttons */
+.polls {
+	#padding;
+	.table-responsive {
+		margin: 50px 0 20px;
+		th,td{
+			text-align: center;
+		}
+	}
+	.search {
+		margin-top: 10px;
+	}
+	table+.btn.btn-lg {
+		#button-style;
+	}
+	.container {
+		padding-bottom: 35px;
+	}
+	.loadMore {
+		text-align: center;
+	}
+}
 
+/* Styling paddings and buttons */
+
+.polls,
+.poll,
 .register,
 .login,
 .settings,
@@ -152,17 +180,11 @@ main {
 		}
 	}
 }
-
-
 /* Styling inputs */
 
 .form-control,
 .form-group .form-control {
 	background-image: linear-gradient(@general-color, @general-color), linear-gradient(black, black);
-}
-
-.form-group label.control-label {
-	color: black;
 }
 
 .form-group.is-focused label,
@@ -174,27 +196,19 @@ main {
 	background-image: linear-gradient(@general-color, @general-color), linear-gradient(black, black);
 }
 
-.form-group.form-group-sm label.control-label {
-	color: black;
+.radio {
+	input[type=radio]:checked~.check {
+		background-color: @general-color;
+	}
+	input[type=radio]:checked~.circle {
+		border-color: @general-color;
+	}
 }
 
-
-/* Polls */
-
-.polls {
-	#padding;
-	.table {
-		margin: 40px 0;
-	}
-	.search {
-		margin-top: 10px;
-	}
-	table+.btn.btn-lg {
-		#button-style;
-	}
-	.container {
-		padding-bottom: 35px;
-	}
+.form-group .radio label,
+.form-group label,
+.form-group label.control-label {
+	color: black;
 }
 
 
@@ -217,6 +231,36 @@ main {
 		}
 	}
 	#myPolls {
-		margin-top: 30px;
+		.table-responsive {
+			margin: 40px 0;
+			th,td{
+				text-align: center;
+			}
+		}
 	}
 }
+
+
+/* Poll */
+.vote{
+	margin-top: 40px;
+	text-align: center;
+}
+
+.primary,.percent{
+	margin-top: 50px;
+}
+
+.primary,.percent>p:first-child{
+	font-size: 1.8rem;
+}
+
+.percent>p:first-child{
+	margin-bottom: 20px;
+}
+
+.progress .progress-bar{
+	background-color: black;
+}
+
+

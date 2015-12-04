@@ -39,7 +39,15 @@ app.config([
 				//controller: 'HomeCtrl',
 
 			})
+			.state('poll', {
+				url: '/poll',
+				templateUrl: 'app/poll/poll.html',
+				//controller: 'HomeCtrl',
+
+			})
 		;
+
+
 
 		$urlRouterProvider.otherwise('home');
 
