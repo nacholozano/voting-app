@@ -125,8 +125,13 @@ main {
 
 .welcome {
 	text-align: center;
+	/*background-image: url('http://img.rasset.ie/00077c50-642.jpg');*/
+	/*background-image: url('http://a-cuatico.bligoo.cl/media/users/18/916420/images/public/197323/encuesta2.jpg?v=1328192628384');*/
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+
 	.container-fluid {
-		background-color: #76b6ef;
+		background-color: rgba(118, 182, 239, 0.8) /*#76b6ef*/;
 		padding: 70px 0;
 		p {
 			margin: 30px 0 10px;
@@ -140,13 +145,15 @@ main {
 	}
 }
 
+
 /* Polls */
 
 .polls {
 	#padding;
 	.table-responsive {
 		margin: 50px 0 20px;
-		th,td{
+		th,
+		td {
 			text-align: center;
 		}
 	}
@@ -164,6 +171,7 @@ main {
 	}
 }
 
+
 /* Styling paddings and buttons */
 
 .polls,
@@ -180,6 +188,8 @@ main {
 		}
 	}
 }
+
+
 /* Styling inputs */
 
 .form-control,
@@ -187,13 +197,17 @@ main {
 	background-image: linear-gradient(@general-color, @general-color), linear-gradient(black, black);
 }
 
-.form-group.is-focused label,
-.form-group.is-focused label.control-label {
+.form-group.is-focused:not(.has-error) label,
+.form-group.is-focused:not(.has-error) label.control-label {
 	color: @general-color;
 }
 
 .form-group.is-focused .form-control {
 	background-image: linear-gradient(@general-color, @general-color), linear-gradient(black, black);
+}
+
+.form-group.is-focused.has-error .form-control {
+	background-image: linear-gradient(red, red), linear-gradient(black, black);
 }
 
 .radio {
@@ -233,7 +247,8 @@ main {
 	#myPolls {
 		.table-responsive {
 			margin: 40px 0;
-			th,td{
+			th,
+			td {
 				text-align: center;
 			}
 		}
@@ -242,24 +257,29 @@ main {
 
 
 /* Poll */
-.vote{
+
+.vote {
 	margin-top: 40px;
 }
 
-.primary,.percent{
+.primary,
+.percent {
 	margin-top: 50px;
 }
 
-.primary,.percent>p:first-child{
+.primary,
+.percent>p:first-child {
 	font-size: 1.8rem;
 }
 
-.percent>p:first-child{
+.percent>p:first-child {
 	margin-bottom: 20px;
 }
 
-.progress .progress-bar{
+.progress .progress-bar {
 	background-color: black;
 }
 
-
+.info+.btn.btn-lg {
+	margin-bottom: 30px;
+}

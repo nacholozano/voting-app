@@ -1,6 +1,6 @@
 <div class="home">
 
-	<div class='welcome hide'>
+	<div class='welcome'>
 
 		<div class="container-fluid">
 
@@ -28,7 +28,7 @@
 					<div class="form-group">
 						<div>
 							<label for="search" class="control-label">Search</label>
-							<input type="text" class="form-control" id="search">
+							<input ng-model='search.name' type="text" class="form-control" id="search">
 						</div>
 					</div>
 
@@ -40,9 +40,9 @@
 						<label for="orderBy" class="control-label">Order by</label>
 
 						<div>
-							<select id="orderBy" class="form-control">
-								<option>Newest first</option>
-								<option>Total votes</option>
+							<select ng-model='order' id="orderBy" class="form-control">
+								<option value="date">Newest first</option>
+								<option value="-totalVotes">Total votes</option>
 							</select>
 						</div>
 					</div>
@@ -61,27 +61,17 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td><a href="">name</a></td>
+						<tr ng-repeat='poll in polls | orderBy: order | filter: search | limitTo: limit'>
+							<td><a href="">{{poll.name}}</a></td>
 							<td>coca cola</td>
-							<td>300</td>
-						</tr>
-						<tr>
-							<td><a href="">name</a></td>
-							<td>coca cola</td>
-							<td>300</td>
-						</tr>
-						<tr>
-							<td><a href="">name</a></td>
-							<td>coca cola</td>
-							<td>300</td>
+							<td>{{poll.totalVotes}}</td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
 
 			<div class="loadMore">
-				<a href="/#/register/" class="btn btn-lg">Load more</a>
+				<a href="/#/register/" class="btn btn-lg" ng-click='loadMore()'>Load more</a>
 			</div>
 
 		</div>

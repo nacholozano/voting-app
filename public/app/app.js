@@ -1,14 +1,19 @@
-var app = angular.module('votingApp', ['ui.router']);
+(function () {
+	angular
+		.module('votingApp', ['ui.router'])
 
-app.config([
+	.config([
     '$stateProvider',
     '$urlRouterProvider',
-    function ($stateProvider, $urlRouterProvider) {
+		routing
+]);
+
+	function routing($stateProvider, $urlRouterProvider) {
 		$stateProvider
 			.state('home', {
 				url: '/home',
 				templateUrl: 'app/home/home.html',
-				//controller: 'HomeCtrl',
+				controller: 'HomeCtrl',
 				/*resolve: {
 						postPromise: ['posts', function (posts) {
 							return posts.getAll();
@@ -36,7 +41,7 @@ app.config([
 			.state('dashboard', {
 				url: '/dashboard',
 				templateUrl: 'app/dashboard/dashboard.html',
-				//controller: 'HomeCtrl',
+				controller: 'DashboardCtrl',
 
 			})
 			.state('poll', {
@@ -44,12 +49,11 @@ app.config([
 				templateUrl: 'app/poll/poll.html',
 				//controller: 'HomeCtrl',
 
-			})
-		;
-
+			});
 
 
 		$urlRouterProvider.otherwise('home');
 
-    }
-]);
+	}
+
+})();
