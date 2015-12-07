@@ -1,6 +1,7 @@
 /* Vars */
 
 @general-color: #1E88E5;
+@deleteButton: #fd6f6f;
 
 /* Mixins */
 
@@ -129,9 +130,9 @@ main {
 	/*background-image: url('http://a-cuatico.bligoo.cl/media/users/18/916420/images/public/197323/encuesta2.jpg?v=1328192628384');*/
 	background-repeat: no-repeat;
 	background-size: 100% 100%;
-
 	.container-fluid {
-		background-color: rgba(118, 182, 239, 0.8) /*#76b6ef*/;
+		background-color: rgba(118, 182, 239, 0.8)/*#76b6ef*/
+		;
 		padding: 70px 0;
 		p {
 			margin: 30px 0 10px;
@@ -167,6 +168,10 @@ main {
 		padding-bottom: 35px;
 	}
 	.loadMore {
+		text-align: center;
+	}
+	.noPolls {
+		margin-top: 80px;
 		text-align: center;
 	}
 }
@@ -251,6 +256,12 @@ main {
 			td {
 				text-align: center;
 			}
+			button {
+				background-color: @deleteButton;
+				border: none;
+				outline: 0;
+			}
+			;
 		}
 	}
 }
@@ -264,7 +275,7 @@ main {
 
 .primary,
 .percent {
-	margin-top: 50px;
+	margin-top: 35px;
 }
 
 .primary,

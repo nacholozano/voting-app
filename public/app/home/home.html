@@ -1,6 +1,6 @@
 <div class="home">
 
-	<div class='welcome'>
+	<div class='welcome hide'>
 
 		<div class="container-fluid">
 
@@ -22,7 +22,7 @@
 
 			<h2>Public polls</h2>
 
-			<div class="row search">
+			<div ng-hide='noPolls' class="row search">
 				<div class="col-md-4 col-md-offset-1 col-sm-4 col-sm-offset-1 col-xs-12">
 
 					<div class="form-group">
@@ -51,7 +51,7 @@
 
 			</div>
 
-			<div class='table-responsive'>
+			<div ng-hide='noPolls' class='table-responsive'>
 				<table class="table table-striped table-hover">
 					<thead>
 						<tr>
@@ -68,10 +68,15 @@
 						</tr>
 					</tbody>
 				</table>
+
 			</div>
 
-			<div class="loadMore">
+			<div ng-hide='noPolls' class="loadMore">
 				<a href="/#/register/" class="btn btn-lg" ng-click='loadMore()'>Load more</a>
+			</div>
+
+			<div ng-show='noPolls' class="noPolls">
+				<h2>No polls</h2>
 			</div>
 
 		</div>

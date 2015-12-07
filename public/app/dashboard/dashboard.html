@@ -62,29 +62,11 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td> <a href="">Poll name</a> </td>
+							<tr ng-repeat='poll in myPolls'>
+								<td> <a ng-href="/#/polls/{{poll.id}}">{{poll.name}}</a> </td>
 								<td>coca cola</td>
-								<td>564</td>
-								<td>Delete</td>
-							</tr>
-							<tr>
-								<td> <a href="">Poll name</a> </td>
-								<td>coca cola</td>
-								<td>564</td>
-								<td>Delete</td>
-							</tr>
-							<tr>
-								<td> <a href="">Poll name</a> </td>
-								<td>coca cola</td>
-								<td>564</td>
-								<td>Delete</td>
-							</tr>
-							<tr>
-								<td> <a href="">Poll name</a> </td>
-								<td>coca cola</td>
-								<td>564</td>
-								<td>Delete</td>
+								<td>{{poll.totalVotes}}</td>
+								<td><button ng-click='deletePoll(poll.id)'>Delete</button></td>
 							</tr>
 						</tbody>
 					</table>

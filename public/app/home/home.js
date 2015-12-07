@@ -16,6 +16,7 @@
 		};
 
 		$scope.polls = polls.polls;
+		$scope.noPolls = polls.polls.length === 0 ? true : false ;
 
 	}
 

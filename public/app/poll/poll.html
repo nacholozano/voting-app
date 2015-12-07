@@ -2,21 +2,17 @@
 
 	<div class="container">
 
-		<h2>Poll name</h2>
+		<h2>{{poll.name}}</h2>
 
 		<section class="vote">
 
 			<form>
+
 				<div class="form-group">
 
-					<div class="radio ">
+					<div class="radio" ng-repeat='option in poll.options'>
 						<label>
-							<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked=''> Option one is this
-						</label>
-					</div>
-					<div class="radio">
-						<label>
-							<input type="radio" name="optionsRadios" id="optionsRadios2" value="option2"> Option one is this
+							<input type="radio" name="optionsRadios" id="optionsRadios{{$index+1}}" value="option{{$index+1}}" checked=''> {{option.name}}
 						</label>
 					</div>
 
@@ -31,31 +27,21 @@
 		<section class="info">
 
 			<section class="primary">
-				<p>Winner: <span>Option X</span> </p>
-				<p> Total votes: <span>456</span> </p>
+				<p> Total votes: <span> {{poll.totalVotes}} </span> </p>
 			</section>
 
 			<section class="percent">
 				<p>Percents</p>
 
-				<div>
-					<p>option 1</p>
-					<div class="progress">
-						<div class="progress-bar" style="width: 60%;"></div>
-					</div>
+				<div ng-repeat='option in poll.options | orderBy: "-votes" '>
 
-				</div>
-				<div>
-					<p>option 1</p>
-					<div class="progress">
-						<div class="progress-bar" style="width: 60%;"></div>
-					</div>
+					<p>
+						<span>{{option.name}}</span>
+						<span>{{option.votes*100/poll.totalVotes | number:2 }} %</span>
+					</p>
 
-				</div>
-				<div>
-					<p>option 1</p>
 					<div class="progress">
-						<div class="progress-bar" style="width: 60%;"></div>
+						<div class="progress-bar" ng-style="{'width': (option.votes*100/poll.totalVotes)+'%' }"></div>
 					</div>
 
 				</div>
@@ -64,7 +50,7 @@
 
 		</section>
 
-		<button type='submit' class='btn btn-lg'>Delete</button>
+		<button type='submit' class='btn btn-lg' ng-click='deletePoll(poll.id)'>Delete</button>
 
 	</div>
 
