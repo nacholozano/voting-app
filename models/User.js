@@ -9,6 +9,7 @@ var UserSchema = new mongoose.Schema({
 		lowercase: true,
 		unique: true
 	},
+	email: String, //validate email with regex
 	hash: String,
 	salt: String
 
@@ -38,4 +39,4 @@ UserSchema.methods.generateJWT = function () {
 
 };
 
-mongoose.model('User',UserSchema);
+mongoose.model('User', UserSchema);

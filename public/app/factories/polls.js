@@ -1,4 +1,5 @@
-;(function () {
+;
+(function () {
 
 	angular.module('votingApp')
 		.factory('polls', polls);
@@ -16,12 +17,15 @@
 				date: 2,
 				private: false,
 				options: [{
+					id: 1,
 					name: 'a',
 					votes: 2
 				}, {
+					id: 2,
 					name: 'b',
 					votes: 5
 				}, {
+					id: 3,
 					name: 'c',
 					votes: 5
 				}],
@@ -34,12 +38,15 @@
 				date: 1,
 				private: false,
 				options: [{
+					id: 1,
 					name: 'a',
 					votes: 0
 				}, {
+					id: 2,
 					name: 'b',
 					votes: 5
 				}, {
+					id: 3,
 					name: 'c',
 					votes: 5
 				}],
@@ -51,9 +58,11 @@
 				date: 48,
 				private: false,
 				options: [{
+					id: 1,
 					name: 'a',
 					votes: 2
 				}, {
+					id: 2,
 					name: 'b',
 					votes: 5
 				}],
@@ -61,22 +70,39 @@
 			},
 		];
 
-		service.createPoll = function ( newPoll ) {
+		service.createPoll = function (newPoll) {
 			service.polls.push(newPoll);
 		};
 
-		service.deletePoll = function( pollId ){
-			var pollIndex = service.polls.findIndex(function(e){
+		service.deletePoll = function (pollId) {
+			var pollIndex = service.polls.findIndex(function (e) {
 				return e.id === pollId;
 			});
 			service.polls.splice(pollIndex, 1);
 		};
 
-		service.getPoll = function( pollId ){
-			var poll = service.polls.find(function(e){
+		service.getPoll = function (pollId) {
+			var poll = service.polls.find(function (e) {
 				return e.id === pollId;
 			});
 			return poll;
+		};
+
+		service.votePoll = function (pollId, optionVoteId) {
+
+			var pollIndex = service.polls.findIndex(function (e) {
+				return e.id === pollId;
+			});
+			var optionIndex = service.polls[pollIndex].options.findIndex(function (e) {
+				return e.id === optionVoteId;
+			});
+
+			console.log(optionIndex);
+			console.log(service.polls[pollIndex]);
+
+			service.polls[pollIndex].options[optionIndex].votes += 1;
+			service.polls[pollIndex].totalVotes += 1;
+
 		};
 
 		return service;

@@ -170,10 +170,11 @@ main {
 	.loadMore {
 		text-align: center;
 	}
-	.noPolls {
-		margin-top: 80px;
-		text-align: center;
-	}
+}
+
+.noPolls {
+	margin-top: 80px;
+	text-align: center;
 }
 
 
@@ -273,19 +274,20 @@ main {
 	margin-top: 40px;
 }
 
-.primary,
+.totalVotes,
 .percent {
 	margin-top: 35px;
 }
 
-.primary,
-.percent>p:first-child {
+.totalVotes {
 	font-size: 1.8rem;
 }
 
-.percent>p:first-child {
+
+/*
+.percent>h3 {
 	margin-bottom: 20px;
-}
+}*/
 
 .progress .progress-bar {
 	background-color: black;
@@ -293,4 +295,11 @@ main {
 
 .info+.btn.btn-lg {
 	margin-bottom: 30px;
+}
+
+.optionPercent {
+	span:first-child {
+		font-size: 2rem;
+		margin-right: 3%;
+	}
 }

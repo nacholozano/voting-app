@@ -22,15 +22,13 @@
 			})
 			.state('login', {
 				url: '/login',
-				templateUrl: 'app/login/login.html',
-				//controller: 'HomeCtrl',
-
+				templateUrl: 'app/sign/login.html',
+				controller: 'AuthCtrl',
 			})
 			.state('register', {
 				url: '/register',
-				templateUrl: 'app/register/register.html',
-				//controller: 'HomeCtrl',
-
+				templateUrl: 'app/sign/register.html',
+				controller: 'AuthCtrl',
 			})
 			.state('settings', {
 				url: '/settings',

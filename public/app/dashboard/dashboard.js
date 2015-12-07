@@ -17,20 +17,30 @@
 
 
 		/* Add option */
-		$scope.options = [];
+		$scope.options = [{
+			id: 1,
+			name: ''
+		},{
+			id: 2,
+			name: ''
+		}];
 
 		var addOptionCounter = 2, // number of inputs (default: 2)
 			newPollForm = angular.element('.options'); //get new poll form
 
 		$scope.addOption = function () {
 			// new input
-			var newOption = "<div class='form-group'> <input required maxlength='70' class='form-control' type='text' id='inputSmall' placeholder='Option' ng-model='options[" + addOptionCounter + "]'> </div>";
+			var newOption = "<div class='form-group'> <input required maxlength='70' class='form-control' type='text' id='inputSmall' placeholder='Option' ng-model='options[" + addOptionCounter + "].name'> </div>";
 
 			newPollForm.append($compile(newOption)($scope));
 
-			addOptionCounter++;
+			//new option
+			$scope.options[addOptionCounter] = {
+				id: ++addOptionCounter,
+				name: ''
+			};
 
-		}
+		};
 
 		/* New poll */
 		$scope.createPoll = function () {
@@ -52,9 +62,12 @@
 		}
 
 		/* My polls */
+
+		$scope.noPolls = polls.polls.length === 0 ? true : false ;
 		$scope.myPolls = polls.polls;
 		$scope.deletePoll = function(pollId){
 			polls.deletePoll(pollId);
+			$scope.noPolls = polls.polls.length === 0 ? true : false ;
 		};
 
 	}
