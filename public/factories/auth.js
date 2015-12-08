@@ -2,9 +2,9 @@
 (function () {
 
 	angular.module('votingApp')
-		.factory('auth', ['$http', '$window', auth]);
+		.factory('auth', ['$http', '$window', '$state', auth]);
 
-	function auth($http, $window) {
+	function auth($http, $window, $state) {
 
 		var service = {};
 
@@ -32,24 +32,25 @@
 			if (service.isLoggedIn()) {
 				var token = service.getToken();
 				var payload = JSON.parse($window.atob(token.split('.')[1]));
-				return payload.username;
+				return payload;
 			}
 		};
 
 		service.register = function (user) {
-			return $http.post('/register', user).success(function (data) {
+			return $http.post('/users/register', user).success(function (data) {
 				service.saveToken(data.token);
 			});
 		};
 
 		service.login = function (user) {
-			return $http.post('/login', user).success(function (data) {
+			return $http.post('/users/login', user).success(function (data) {
 				service.saveToken(data.token);
 			});
 		};
 
 		service.logOut = function () {
-			$window.localStorage.removeItem['voting-app-token'];
+			$window.localStorage.removeItem('voting-app-token');
+			$state.go('home');
 		};
 
 		return service;

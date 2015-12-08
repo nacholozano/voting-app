@@ -7,8 +7,15 @@ var UserSchema = new mongoose.Schema({
 	username: String,
 	email: {
 		type: String,
-		unique: true
-	}, //validate email with regex
+		unique: true,
+		validate: {
+			validator: function (v) {
+				return /^.+[@].+[.].+$/.test(v);
+			},
+			message: '{VALUE} is not a valid email!'
+		}
+
+	},
 	hash: String,
 	salt: String
 
@@ -34,7 +41,7 @@ UserSchema.methods.generateJWT = function () {
 		_id: this._id,
 		username: this.username,
 		exp: parseInt(exp.getTime() / 1000) // expiration date in seconds
-	}, 'SECRET'); // Sign
+	}, process.env['SECRET']); // Sign
 
 };
 

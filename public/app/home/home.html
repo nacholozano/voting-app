@@ -1,6 +1,6 @@
 <div class="home">
 
-	<div class='welcome hide'>
+	<div ng-hide='isLoggedIn()' class='welcome'>
 
 		<div class="container-fluid">
 
@@ -16,66 +16,91 @@
 
 	</div>
 
-	<div class="polls">
+	<div ng-show='isLoggedIn()' class="dashboard">
+
 
 		<div class="container">
 
-			<h2>Public polls</h2>
+			<h2>Dashboard</h2>
 
-			<div ng-hide='noPolls' class="row search">
-				<div class="col-md-4 col-md-offset-1 col-sm-4 col-sm-offset-1 col-xs-12">
+			<div class="btn-group btn-group-justified btn-group-raised">
+				<a href="" class="btn" ng-click='setTab("newPoll")' ng-class="{ actived:isSet('newPoll') }">New poll</a>
+				<a href="" class="btn" ng-click='setTab("myPolls")' ng-class="{ actived:isSet('myPolls') }">My polls</a>
+			</div>
 
-					<div class="form-group">
-						<div>
-							<label for="search" class="control-label">Search</label>
-							<input ng-model='search.name' type="text" class="form-control" id="search">
+			<div class="content">
+
+				<!-- New poll -->
+
+				<section id="newPoll" ng-show='isSet("newPoll")'>
+
+					<form ng-submit='createPoll()'>
+
+						<div class="form-group">
+							<label class="control-label" for="namePoll">Name your poll</label>
+							<input maxlength='100' type="text" class="form-control" id="namePoll" required ng-model='pollName'>
 						</div>
+
+						<div class="checkbox">
+							<label>
+								<input type="checkbox" ng-model='private'> <span class="privatePoll">Make this poll private</span>
+							</label>
+						</div>
+
+						<div class="options">
+
+							<p>Options</p>
+
+							<div class="form-group">
+								<input required maxlength='70' class="form-control" type="text" id="inputSmall" placeholder="Option" ng-model='options[0].name'>
+							</div>
+							<div class="form-group">
+								<input required maxlength='70' class="form-control" type="text" id="inputSmall" placeholder="Option" ng-model='options[1].name'>
+							</div>
+
+						</div>
+
+						<button type='button' class='btn btn-lg' ng-click='addOption()'>New option</button>
+						<button type='submit' class='btn btn-lg'>Submit</button>
+
+					</form>
+
+				</section>
+
+				<!-- My polls -->
+
+				<section id="myPolls" ng-show='isSet("myPolls")'>
+
+					<div ng-hide='noPolls' class="table-responsive">
+
+						<table class="table table-striped table-hover">
+							<thead>
+								<tr>
+									<th>Poll name</th>
+									<th>Most voted</th>
+									<th>Total votes</th>
+									<th>Operation</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat='poll in myPolls'>
+									<td> <a ng-href="/#/polls/{{poll.id}}">{{poll.name}}</a> </td>
+									<td>coca cola</td>
+									<td>{{poll.totalVotes}}</td>
+									<td>
+										<button ng-click='deletePoll(poll.id)'>Delete</button>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+
 					</div>
 
-				</div>
+					<h3 ng-show='noPolls' class="noPolls">No polls</h3>
 
-				<div class="col-md-4 col-md-offset-2 col-sm-4 col-sm-offset-2 col-xs-12">
-
-					<div class="form-group">
-						<label for="orderBy" class="control-label">Order by</label>
-
-						<div>
-							<select ng-model='order' id="orderBy" class="form-control">
-								<option value="date">Newest first</option>
-								<option value="-totalVotes">Total votes</option>
-							</select>
-						</div>
-					</div>
-
-				</div>
+				</section>
 
 			</div>
-
-			<div ng-hide='noPolls' class='table-responsive'>
-				<table class="table table-striped table-hover">
-					<thead>
-						<tr>
-							<th>Poll name</th>
-							<th>Most voted</th>
-							<th>Total votes</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr ng-repeat='poll in polls | orderBy: order | filter: search | limitTo: limit'>
-							<td><a href="">{{poll.name}}</a></td>
-							<td>coca cola</td>
-							<td>{{poll.totalVotes}}</td>
-						</tr>
-					</tbody>
-				</table>
-
-			</div>
-
-			<div ng-hide='noPolls' class="loadMore">
-				<a href="/#/register/" class="btn btn-lg" ng-click='loadMore()'>Load more</a>
-			</div>
-
-			<h2 ng-show='noPolls' class="noPolls">No polls</h2>
 
 		</div>
 

@@ -6,6 +6,7 @@ var PollSchema = new mongoose.Schema({
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'User'
 	},
+	private: Boolean,
 	date: Date,
 	name: String,
 	options: [{

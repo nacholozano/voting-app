@@ -11,12 +11,14 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var passport = require('passport');
 require('./models/User');
+require('./models/Poll');
 require('./config/passport');
 mongoose.connect('mongodb://localhost/votingApp');
 
 //Routes
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var polls = require('./routes/polls');
 
 var app = express();
 
@@ -36,8 +38,10 @@ app.use(require('less-middleware')(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(passport.initialize());
 
+// Routes middleware
 app.use('/', routes);
 app.use('/users', users);
+app.use('/polls', polls);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

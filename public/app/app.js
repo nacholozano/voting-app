@@ -15,32 +15,35 @@
 				url: '/home',
 				templateUrl: 'app/home/home.html',
 				controller: 'HomeCtrl',
-				/*resolve: {
-						postPromise: ['posts', function (posts) {
-							return posts.getAll();
-                }]
-					}*/
 			})
 			.state('login', {
 				url: '/login',
 				templateUrl: 'app/sign/login.html',
 				controller: 'AuthCtrl',
+				onEnter: ['$state', 'auth', function ($state, auth) {
+					if (auth.isLoggedIn()) {
+						$state.go('home');
+					}
+				}]
 			})
 			.state('register', {
 				url: '/register',
 				templateUrl: 'app/sign/register.html',
 				controller: 'AuthCtrl',
+				onEnter: ['$state', 'auth', function ($state, auth) {
+					if (auth.isLoggedIn()) {
+						$state.go('home');
+					}
+			}]
 			})
 			.state('settings', {
 				url: '/settings',
 				templateUrl: 'app/settings/settings.html',
-				//controller: 'HomeCtrl',
-
-			})
-			.state('dashboard', {
-				url: '/dashboard',
-				templateUrl: 'app/dashboard/dashboard.html',
-				controller: 'DashboardCtrl',
+				onEnter: ['$state', 'auth', function ($state, auth) {
+					if (!auth.isLoggedIn()) {
+						$state.go('home');
+					}
+				}]
 
 			})
 			.state('polls', {

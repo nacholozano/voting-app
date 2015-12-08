@@ -13,6 +13,7 @@
 			auth.login($scope.user)
 				.error(function (err) {
 					$scope.error = err;
+					$scope.user = {};
 				})
 				.then(function () {
 					$state.go('home');
@@ -24,6 +25,7 @@
 			auth.register($scope.user)
 				.error(function (err) {
 					$scope.error = err;
+					$scope.user.email = '';
 				})
 				.then(function () {
 					$state.go('home');

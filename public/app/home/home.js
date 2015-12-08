@@ -1,22 +1,76 @@
-;(function(){
+;
+(function () {
 
 	angular.module('votingApp')
 
-	.controller('HomeCtrl',['$scope','polls',HomeCtrl]);
+	.controller('HomeCtrl', ['$scope', 'polls', '$compile', 'auth', DashboardCtrl]);
 
-	function HomeCtrl($scope,polls){
+	function DashboardCtrl($scope, polls, $compile, auth) {
 
-		var pollsNumber = 5;
-
-		$scope.order = 'date';
-		$scope.search = '';
-		$scope.limit = pollsNumber;
-		$scope.loadMore = function(){
-			$scope.limit += pollsNumber;
+		/* Tabs */
+		$scope.tab = 'newPoll';
+		$scope.isSet = function (tab) {
+			return $scope.tab === tab;
+		};
+		$scope.setTab = function (tab) {
+			$scope.tab = tab;
 		};
 
-		$scope.polls = polls.polls;
-		$scope.noPolls = polls.polls.length === 0 ? true : false ;
+		$scope.isLoggedIn = auth.isLoggedIn;
+
+		/* Add option */
+		$scope.options = [{
+			id: 1,
+			name: ''
+		}, {
+			id: 2,
+			name: ''
+		}];
+
+		var addOptionCounter = 2, // number of inputs (default: 2)
+			newPollForm = angular.element('.options'); //get new poll form
+
+		$scope.addOption = function () {
+			// new input
+			var newOption = "<div class='form-group'> <input required maxlength='70' class='form-control' type='text' id='inputSmall' placeholder='Option' ng-model='options[" + addOptionCounter + "].name'> </div>";
+
+			newPollForm.append($compile(newOption)($scope));
+
+			//new option
+			$scope.options[addOptionCounter] = {
+				id: ++addOptionCounter,
+				name: ''
+			};
+
+		};
+
+		/* New poll */
+		$scope.createPoll = function () {
+
+			polls.createPoll({
+				author: 'nacho',
+				name: $scope.pollName,
+				date: 100,
+				private: $scope.private,
+				options: $scope.options,
+				totalVotes: 0
+			});
+
+			// Reset form
+			$scope.options = [];
+			$scope.pollName = '';
+			$scope.private = '';
+
+		}
+
+		/* My polls */
+
+		$scope.noPolls = polls.polls.length === 0 ? true : false;
+		$scope.myPolls = polls.polls;
+		$scope.deletePoll = function (pollId) {
+			polls.deletePoll(pollId);
+			$scope.noPolls = polls.polls.length === 0 ? true : false;
+		};
 
 	}
 
