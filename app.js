@@ -7,10 +7,11 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+
 var mongoose = require('mongoose');
 var passport = require('passport');
-require('./models/User.js');
-require('./config/passport.js');
+require('./models/User');
+require('./config/passport');
 mongoose.connect('mongodb://localhost/votingApp');
 
 //Routes
@@ -68,6 +69,5 @@ app.use(function (err, req, res, next) {
 		error: {}
 	});
 });
-
 
 module.exports = app;

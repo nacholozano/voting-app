@@ -1,4 +1,5 @@
-;(function () {
+;
+(function () {
 	angular
 		.module('votingApp', ['ui.router'])
 
@@ -42,12 +43,6 @@
 				controller: 'DashboardCtrl',
 
 			})
-			/*.state('poll', {
-				url: '/poll',
-				templateUrl: 'app/poll/poll.html',
-				//controller: 'HomeCtrl',
-
-			})*/
 			.state('polls', {
 				url: '/polls/:id',
 				templateUrl: 'app/poll/poll.html',

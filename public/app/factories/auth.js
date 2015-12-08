@@ -37,16 +37,17 @@
 		};
 
 		service.register = function (user) {
-			return $http.post('/register', user).success(data) {
+			return $http.post('/register', user).success(function (data) {
 				service.saveToken(data.token);
-			};
+			});
 		};
 
 		service.login = function (user) {
-			return $http.post('/login', user).success(data) {
+			return $http.post('/login', user).success(function (data) {
 				service.saveToken(data.token);
-			};
-		}
+			});
+		};
+
 		service.logOut = function () {
 			$window.localStorage.removeItem['voting-app-token'];
 		};

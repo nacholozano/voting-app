@@ -6,6 +6,7 @@ var PollSchema = new mongoose.Schema({
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'User'
 	},
+	date: Date,
 	name: String,
 	options: [{
 		id: Number,
@@ -26,8 +27,10 @@ var PollSchema = new mongoose.Schema({
 
 });
 
-PollSchema.methods.vote = function(voterId,optionId){
-	var optionIndex = this.options.findIndex({ id: optionId });
+PollSchema.methods.vote = function (voterId, optionId) {
+	var optionIndex = this.options.findIndex({
+		id: optionId
+	});
 	this.options[optionIndex].votes += 1;
 	this.totalVotes += 1;
 	this.voters.push(voterId);
