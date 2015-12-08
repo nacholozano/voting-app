@@ -7,6 +7,8 @@
 
 	function DashboardCtrl($scope, polls, $compile, auth) {
 
+		$scope.isLoggedIn = auth.isLoggedIn;
+
 		/* Tabs */
 		$scope.tab = 'newPoll';
 		$scope.isSet = function (tab) {
@@ -15,8 +17,6 @@
 		$scope.setTab = function (tab) {
 			$scope.tab = tab;
 		};
-
-		$scope.isLoggedIn = auth.isLoggedIn;
 
 		/* Add option */
 		$scope.options = [{
@@ -70,6 +70,14 @@
 		$scope.deletePoll = function (pollId) {
 			polls.deletePoll(pollId);
 			$scope.noPolls = polls.polls.length === 0 ? true : false;
+		};
+
+		/* Filters */
+		$scope.order = 'date';
+		$scope.search = '';
+		$scope.limit = 5;
+		$scope.loadMore = function () {
+			$scope.limit += $scope.limit;
 		};
 
 	}

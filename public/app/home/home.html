@@ -18,7 +18,6 @@
 
 	<div ng-show='isLoggedIn()' class="dashboard">
 
-
 		<div class="container">
 
 			<h2>Dashboard</h2>
@@ -71,6 +70,32 @@
 
 				<section id="myPolls" ng-show='isSet("myPolls")'>
 
+					<div ng-hide='noPolls' class="row search">
+						<div class="col-md-4 col-md-offset-1 col-sm-4 col-sm-offset-1 col-xs-12">
+							<div class="form-group">
+								<div>
+									<label for="search" class="control-label">Search</label>
+									<input ng-model='search.name' type="text" class="form-control" id="search">
+
+								</div>
+
+							</div>
+						</div>
+
+						<div class="col-md-4 col-md-offset-2 col-sm-4 col-sm-offset-2 col-xs-12">
+							<div class="form-group">
+								<label for="orderBy" class="control-label">Order by</label>
+								<div>
+									<select ng-model='order' id="orderBy" class="form-control">
+										<option value="date">Newest first</option>
+										<option value="-totalVotes">Total votes</option>
+									</select>
+								</div>
+							</div>
+
+						</div>
+					</div>
+
 					<div ng-hide='noPolls' class="table-responsive">
 
 						<table class="table table-striped table-hover">
@@ -83,12 +108,12 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr ng-repeat='poll in myPolls'>
+								<tr ng-repeat='poll in myPolls | orderBy: order | filter: search | limitTo: limit'>
 									<td> <a ng-href="/#/polls/{{poll.id}}">{{poll.name}}</a> </td>
 									<td>coca cola</td>
 									<td>{{poll.totalVotes}}</td>
 									<td>
-										<button ng-click='deletePoll(poll.id)'>Delete</button>
+										<button ng-click='deletePoll(poll.id) '>Delete</button>
 									</td>
 								</tr>
 							</tbody>
@@ -96,7 +121,11 @@
 
 					</div>
 
-					<h3 ng-show='noPolls' class="noPolls">No polls</h3>
+					<div class="loadDiv">
+						<a href=' ' class="btn btn-lg loadMore">Load more</a>
+					</div>
+
+					<h3 ng-show='noPolls ' class="noPolls">No polls</h3>
 
 				</section>
 
