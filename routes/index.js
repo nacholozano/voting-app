@@ -5,7 +5,7 @@ var passport = require('passport');
 var User = mongoose.model('User');
 var jwt = require('express-jwt');
 var auth = jwt({
-	secret: process.env['SECRET'],
+	secret: 'SECRET',
 	userProperty: 'payload'
 });
 
@@ -20,7 +20,6 @@ router.get('/', function (req, res, next) {
 router.post('/register', function (req, res, next) {
 
 	var data = req.body;
-	console.log(data);
 
 	if (!data.username || !data.password || !data.email) {
 		return res.status(400).json({
@@ -50,7 +49,7 @@ router.post('/login', function (req, res, next) {
 	var data = req.body;
 	console.log(data);
 
-	if (!data.email || !data.password) {
+	if (!data.username || !data.password) {
 		return res.status(400).json({
 			message: 'Please, fill out all the fields'
 		});

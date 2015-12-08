@@ -34,7 +34,7 @@ UserSchema.methods.generateJWT = function () {
 		_id: this._id,
 		username: this.username,
 		exp: parseInt(exp.getTime() / 1000) // expiration date in seconds
-	}, process.env['SECRET']); // Sign
+	}, 'SECRET'); // Sign
 
 };
 
