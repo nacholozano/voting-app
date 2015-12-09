@@ -7,12 +7,35 @@ var auth = jwt({
 	secret: process.env['SECRET'],
 	userProperty: 'payload'
 });
-/*
-router.params('', function (req, res, next, number) {
 
-})
-*/
+Poll.remove({}, function (err) {
+	console.log('collection removed')
+});
 
+// Get polls
+router.get('/', auth, function (req, res, next) {
+
+	var polls = Poll.find({})
+		.limit(req.params.limit)
+		.sort({
+			date: -1
+		});
+
+	polls.exec(function (err, polls) {
+		if (err) {
+			return next(err);
+		}
+		if (!polls) {
+			return next(new Error("No polls"));
+		}
+
+		return res.json(polls);
+
+	});
+
+});
+
+// Create poll
 router.post('/create', auth, function (req, res, next) {
 
 	var poll = new Poll(req.body);
@@ -29,23 +52,5 @@ router.post('/create', auth, function (req, res, next) {
 
 });
 
-// Get polls
-router.get('/polls/:limit', function (req, res, next, limit) {
-	/*
-		var query = Poll.find({
-				private: false
-			})
-			.limit(limit)
-			.select({
-				name: 1,
-				data: 1,
-			});
-
-		query.exec(function (err, person) {
-			if (err) return handleError(err);
-
-		})
-	*/
-});
 
 module.exports = router;

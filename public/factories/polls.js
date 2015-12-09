@@ -9,73 +9,29 @@
 			polls: []
 		};
 
-		service.polls = [
-			{
-				id: 1,
-				author: 'uno',
-				name: 'dos',
-				date: 2,
-				private: false,
-				options: [{
-					id: 1,
-					name: 'a',
-					votes: 2
-				}, {
-					id: 2,
-					name: 'b',
-					votes: 5
-				}, {
-					id: 3,
-					name: 'c',
-					votes: 5
-				}],
-				totalVotes: 12
-			},
-			{
-				id: 2,
-				author: 'uno',
-				name: 'uno',
-				date: 1,
-				private: false,
-				options: [{
-					id: 1,
-					name: 'a',
-					votes: 0
-				}, {
-					id: 2,
-					name: 'b',
-					votes: 5
-				}, {
-					id: 3,
-					name: 'c',
-					votes: 5
-				}],
-				totalVotes: 10
-			}, {
-				id: 3,
-				author: 'uno',
-				name: 'cinco',
-				date: 48,
-				private: false,
-				options: [{
-					id: 1,
-					name: 'a',
-					votes: 2
-				}, {
-					id: 2,
-					name: 'b',
-					votes: 5
-				}],
-				totalVotes: 7
-			},
-		];
-
+		/**
+		 * Create new custom poll
+		 * @param   {[[json object]]} newPoll {[[Object with new poll data]]}
+		 * @returns {[[json object]]} [[Error or poll just created]]
+		 */
 		service.createPoll = function (newPoll) {
-			/*service.polls.push(newPoll);*/
 			return $http.post('/polls/create', newPoll, {
 				headers: {
 					Authorization: 'Bearer ' + auth.getToken()
 				}
+			});
+		};
+
+		/**
+		 * Get all polls
+		 */
+		service.getAll = function () {
+			return $http.get('/polls', {
+				headers: {
+					Authorization: 'Bearer ' + auth.getToken()
+				}
+			}).success(function (polls) {
+				angular.copy(polls, service.polls);
 			});
 		};
 

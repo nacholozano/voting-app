@@ -37,7 +37,7 @@
 
 						<div class="form-group">
 							<label class="control-label" for="namePoll">Name your poll</label>
-							<input maxlength='120' type="text" class="form-control" id="namePoll" required ng-model='newPoll.pollName'>
+							<input maxlength='120' type="text" class="form-control" id="namePoll" required ng-model='newPoll.name'>
 						</div>
 
 						<div class="options">
@@ -111,7 +111,6 @@
 							<thead>
 								<tr>
 									<th>Poll name</th>
-									<th>Most voted</th>
 									<th>Total votes</th>
 									<th>Operation</th>
 								</tr>
@@ -119,7 +118,6 @@
 							<tbody>
 								<tr ng-repeat='poll in myPolls | orderBy: order | filter: search | limitTo: limit'>
 									<td> <a ng-href="/#/polls/{{poll.id}}">{{poll.name}}</a> </td>
-									<td>coca cola</td>
 									<td>{{poll.totalVotes}}</td>
 									<td>
 										<button ng-click='deletePoll(poll.id) '>Delete</button>
@@ -130,9 +128,9 @@
 
 					</div>
 
-					<div class="loadDiv">
+					<!-- <div class="loadDiv">
 						<a href=' ' class="btn btn-lg loadMore">Load more</a>
-					</div>
+					</div> -->
 
 					<h3 ng-show='noPolls ' class="noPolls">No polls</h3>
 

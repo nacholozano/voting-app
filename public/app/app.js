@@ -15,6 +15,11 @@
 				url: '/home',
 				templateUrl: 'app/home/home.html',
 				controller: 'HomeCtrl',
+				resolve: {
+					pollsPromise: ['polls', function (polls) {
+						return polls.getAll();
+					}]
+				}
 			})
 			.state('login', {
 				url: '/login',
