@@ -29,7 +29,7 @@
 			auth.register($scope.user)
 				.error(function (err) {
 					$scope.error = err;
-					$scope.user.email = '';
+					$scope.user.email = ''; // Incorrect email
 				})
 				.success(function () {
 					$state.go('home');

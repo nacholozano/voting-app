@@ -54,13 +54,11 @@
 		};
 
 		service.update = function (data) {
-
 			return $http.put('/user/update', data, {
 				headers: {
 					Authorization: 'Bearer ' + service.getToken()
 				}
 			});
-
 		};
 
 		return service;

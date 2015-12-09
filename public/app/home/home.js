@@ -18,48 +18,41 @@
 			$scope.tab = tab;
 		};
 
-		/* Add option */
-		$scope.options = [{
-			id: 1,
-			name: ''
-		}, {
-			id: 2,
-			name: ''
-		}];
 
+		// Add option
 		var addOptionCounter = 2, // number of inputs (default: 2)
 			newPollForm = angular.element('.options'); //get new poll form
 
 		$scope.addOption = function () {
 			// new input
-			var newOption = "<div class='form-group'> <input required maxlength='70' class='form-control' type='text' id='inputSmall' placeholder='Option' ng-model='options[" + addOptionCounter + "].name'> </div>";
+			var newOption = "<div class='form-group'> <input required maxlength='70' class='form-control' type='text' id='inputSmall' placeholder='Option' ng-model='newPoll.options[" + addOptionCounter + "].name'> </div>";
 
 			newPollForm.append($compile(newOption)($scope));
 
-			//new option
-			$scope.options[addOptionCounter] = {
-				id: ++addOptionCounter,
-				name: ''
-			};
-
+			addOptionCounter++;
 		};
 
 		/* New poll */
+		$scope.newPoll = {
+			options: []
+		};
+
 		$scope.createPoll = function () {
 
-			polls.createPoll({
-				author: 'nacho',
-				name: $scope.pollName,
-				date: 100,
-				private: $scope.private,
-				options: $scope.options,
-				totalVotes: 0
-			});
+			$scope.newPoll.date = new Date();
+
+			polls.createPoll($scope.newPoll)
+				.error(function (error) {
+					$scope.error = error;
+				})
+				.success(function (poll) {
+					$scope.poll = poll;
+				});
 
 			// Reset form
-			$scope.options = [];
-			$scope.pollName = '';
-			$scope.private = '';
+			$scope.newPoll = {
+				options: []
+			};
 
 		}
 

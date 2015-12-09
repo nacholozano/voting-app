@@ -2,9 +2,9 @@
 (function () {
 
 	angular.module('votingApp')
-		.factory('polls', polls);
+		.factory('polls', ['auth', '$http', polls]);
 
-	function polls() {
+	function polls(auth, $http) {
 		var service = {
 			polls: []
 		};
@@ -71,7 +71,12 @@
 		];
 
 		service.createPoll = function (newPoll) {
-			service.polls.push(newPoll);
+			/*service.polls.push(newPoll);*/
+			return $http.post('/polls/create', newPoll, {
+				headers: {
+					Authorization: 'Bearer ' + auth.getToken()
+				}
+			});
 		};
 
 		service.deletePoll = function (pollId) {

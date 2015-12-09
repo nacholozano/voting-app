@@ -37,13 +37,7 @@
 
 						<div class="form-group">
 							<label class="control-label" for="namePoll">Name your poll</label>
-							<input maxlength='100' type="text" class="form-control" id="namePoll" required ng-model='pollName'>
-						</div>
-
-						<div class="checkbox">
-							<label>
-								<input type="checkbox" ng-model='private'> <span class="privatePoll">Make this poll private</span>
-							</label>
+							<input maxlength='120' type="text" class="form-control" id="namePoll" required ng-model='newPoll.pollName'>
 						</div>
 
 						<div class="options">
@@ -51,10 +45,10 @@
 							<p>Options</p>
 
 							<div class="form-group">
-								<input required maxlength='70' class="form-control" type="text" id="inputSmall" placeholder="Option" ng-model='options[0].name'>
+								<input required maxlength='80' class="form-control" type="text" id="inputSmall" placeholder="Option" ng-model='newPoll.options[0].name'>
 							</div>
 							<div class="form-group">
-								<input required maxlength='70' class="form-control" type="text" id="inputSmall" placeholder="Option" ng-model='options[1].name'>
+								<input required maxlength='80' class="form-control" type="text" id="inputSmall" placeholder="Option" ng-model='newPoll.options[1].name'>
 							</div>
 
 						</div>
@@ -63,6 +57,21 @@
 						<button type='submit' class='btn btn-lg'>Submit</button>
 
 					</form>
+					<br>
+					<br>
+
+					<div ng-show='poll' class="alert alert-dismissible alert-success">
+						<button type="button" class="close" data-dismiss="alert">×</button>
+						<strong>Poll has been created</strong>
+						<p>You can access the poll in the next link
+							<br> <a href="/#/polls/">{{poll._id}}</a>
+						</p>
+					</div>
+
+					<div ng-show='error' class="alert alert-dismissible alert-danger">
+						<button type="button" class="close" data-dismiss="alert">×</button>
+						<strong>{{error}}</strong>
+					</div>
 
 				</section>
 
