@@ -13,9 +13,13 @@
 			auth.login($scope.user)
 				.error(function (err) {
 					$scope.error = err;
-					$scope.user = {};
+					if ($scope.error.message === 'Incorrect password') {
+						$scope.user.password = ''; // Incorrect password
+					} else {
+						$scope.user.email = ''; // Incorrect email
+					}
 				})
-				.then(function () {
+				.success(function () {
 					$state.go('home');
 				});
 
@@ -27,7 +31,7 @@
 					$scope.error = err;
 					$scope.user.email = '';
 				})
-				.then(function () {
+				.success(function () {
 					$state.go('home');
 				});
 

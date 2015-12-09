@@ -46,8 +46,6 @@ router.post('/login', function (req, res, next) {
 
 	var data = req.body;
 
-	console.log(data);
-
 	if (!data.email || !data.password) {
 		return res.status(400).json({
 			message: 'Please, fill out all the fields'
@@ -72,10 +70,7 @@ router.post('/login', function (req, res, next) {
 // Update user
 router.put('/update', auth, function (req, res, next) {
 
-	/*var data = req.body;
-
-	console.log(data);
-	console.log(req.payload);
+	var data = req.body;
 
 	if (!data.newPassword || !data.currentPassword) {
 		return res.status(400).json({
@@ -83,19 +78,36 @@ router.put('/update', auth, function (req, res, next) {
 		});
 	}
 
-	var salt = crypto.randomBytes(16).toString('hex');
-	var hash = crypto.pbkdf2Sync(data.newPassword, salt, 1000, 64).toString('hex');
-
-	User.update({
+	User.findOne({
 		_id: req.payload._id
-	}, {
-		$set: {
-			hash: hash
+	}, function (err, user) {
+
+		if (err) {
+			return next(err);
 		}
-	}, function (err, raw) {
-		if (err) return handleError(err);
-		console.log('The raw response from Mongo was ', raw);
-	});*/
+
+		if (user.validPassword(data.currentPassword)) {
+
+			user.setPassword(data.newPassword);
+
+			user.save(function (err, user) {
+				if (err) {
+					return next(err);
+				}
+				return res.json({
+					message: 'Password updated'
+				});
+			});
+
+		} else {
+
+			return res.status(401).json({
+				message: 'Incorrect current password'
+			});
+
+		}
+
+	});
 
 });
 
