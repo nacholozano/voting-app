@@ -37,13 +37,13 @@
 		};
 
 		service.register = function (user) {
-			return $http.post('/users/register', user).success(function (data) {
+			return $http.post('/user/register', user).success(function (data) {
 				service.saveToken(data.token);
 			});
 		};
 
 		service.login = function (user) {
-			return $http.post('/users/login', user).success(function (data) {
+			return $http.post('/user/login', user).success(function (data) {
 				service.saveToken(data.token);
 			});
 		};
@@ -51,6 +51,16 @@
 		service.logOut = function () {
 			$window.localStorage.removeItem('voting-app-token');
 			$state.go('home');
+		};
+
+		service.update = function (data) {
+
+			return $http.put('/user/update', data, {
+				headers: {
+					Authorization: 'Bearer ' + service.getToken()
+				}
+			});
+
 		};
 
 		return service;

@@ -1,12 +1,17 @@
 var express = require('express');
 var router = express.Router();
+var crypto = require('crypto');
 var mongoose = require('mongoose');
 var passport = require('passport');
 var User = mongoose.model('User');
-/*var jwt = require('express-jwt');
+var jwt = require('express-jwt');
 var auth = jwt({
 	secret: process.env['SECRET'],
 	userProperty: 'payload'
+});
+
+/*User.remove({}, function (err) {
+	console.log('collection removed')
 });*/
 
 // Register user
@@ -41,7 +46,9 @@ router.post('/login', function (req, res, next) {
 
 	var data = req.body;
 
-	if (!data.username || !data.password) {
+	console.log(data);
+
+	if (!data.email || !data.password) {
 		return res.status(400).json({
 			message: 'Please, fill out all the fields'
 		});
@@ -59,6 +66,36 @@ router.post('/login', function (req, res, next) {
 		}
 
 	})(req, res, next);
+
+});
+
+// Update user
+router.put('/update', auth, function (req, res, next) {
+
+	/*var data = req.body;
+
+	console.log(data);
+	console.log(req.payload);
+
+	if (!data.newPassword || !data.currentPassword) {
+		return res.status(400).json({
+			message: 'Please, fill out all the fields'
+		});
+	}
+
+	var salt = crypto.randomBytes(16).toString('hex');
+	var hash = crypto.pbkdf2Sync(data.newPassword, salt, 1000, 64).toString('hex');
+
+	User.update({
+		_id: req.payload._id
+	}, {
+		$set: {
+			hash: hash
+		}
+	}, function (err, raw) {
+		if (err) return handleError(err);
+		console.log('The raw response from Mongo was ', raw);
+	});*/
 
 });
 

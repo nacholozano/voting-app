@@ -3,7 +3,10 @@ var LocalStrategy = require('passport-local').Strategy;
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
 
-passport.use(new LocalStrategy(
+passport.use(new LocalStrategy({
+		usernameField: 'email',
+		passwordField: 'password'
+	},
 	function (email, password, done) {
 		User.findOne({
 
@@ -15,7 +18,7 @@ passport.use(new LocalStrategy(
 			}
 			if (!user) {
 				return done(null, false, {
-					message: 'Incorrect username.'
+					message: 'Incorrect email.'
 				});
 			}
 			if (!user.validPassword(password)) {

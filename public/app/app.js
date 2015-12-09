@@ -39,6 +39,7 @@
 			.state('settings', {
 				url: '/settings',
 				templateUrl: 'app/settings/settings.html',
+				controller: 'SettingsCtrl',
 				onEnter: ['$state', 'auth', function ($state, auth) {
 					if (!auth.isLoggedIn()) {
 						$state.go('home');
@@ -50,7 +51,6 @@
 				url: '/polls/:id',
 				templateUrl: 'app/poll/poll.html',
 				controller: 'PollCtrl',
-
 			});
 
 

@@ -7,33 +7,32 @@ var auth = jwt({
 	secret: process.env['SECRET'],
 	userProperty: 'payload'
 });
-
+/*
 router.params('', function (req, res, next, number) {
 
 })
-
+*/
 // Get polls
 router.get('/polls/:limit', function (req, res, next, limit) {
+	/*
+		var query = Poll.find({
+				private: false
+			})
+			.limit(limit)
+			.select({
+				name: 1,
+				data: 1,
+			});
 
-	var query = Poll.find({
-			private: false
+		query.exec(function (err, person) {
+			if (err) return handleError(err);
+
 		})
-		.limit(limit)
-		.select({
-			name: 1,
-			data: 1,
-
-		});
-
-	query.exec(function (err, person) {
-		if (err) return handleError(err);
-
-	})
-
+	*/
 });
 
 module.exports = router;
-
+/*
 user_id: {
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'User'
@@ -56,4 +55,4 @@ user_id: {
 	voters: [{
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'User'
-						}]
+						}]*/

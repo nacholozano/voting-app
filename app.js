@@ -40,7 +40,7 @@ app.use(passport.initialize());
 
 // Routes middleware
 app.use('/', routes);
-app.use('/users', users);
+app.use('/user', users);
 app.use('/polls', polls);
 
 // catch 404 and forward to error handler
