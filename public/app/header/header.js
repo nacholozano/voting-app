@@ -1,14 +1,18 @@
 ;
 (function () {
 
+	'use strict';
+
 	angular.module('votingApp')
-		.controller('HeaderCtrl', ['$scope', 'auth', HeaderCtrl]);
+		.controller('HeaderCtrl', ['auth', HeaderCtrl]);
 
-	function HeaderCtrl($scope, auth) {
+	function HeaderCtrl(auth) {
 
-		$scope.logOut = auth.logOut;
-		$scope.isLoggedIn = auth.isLoggedIn;
-		$scope.currentUser = auth.currentUser;
+		var vm = this;
+
+		vm.logOut = auth.logOut;
+		vm.isLoggedIn = auth.isLoggedIn;
+		vm.currentUser = auth.currentUser;
 
 	};
 

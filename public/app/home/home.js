@@ -1,33 +1,37 @@
 ;
 (function () {
 
+	'use strict';
+
 	angular.module('votingApp')
 
-	.controller('HomeCtrl', ['$scope', 'polls', '$compile', 'auth', 'pollsPromise', DashboardCtrl]);
+	.controller('HomeCtrl', ['polls', '$compile', 'auth' /*'pollsPromise'*/ , HomeCtrl]);
 
-	function DashboardCtrl($scope, polls, $compile, auth, pollsPromise) {
+	function HomeCtrl(polls, $compile, auth /*pollsPromise*/ ) {
+
+		var vm = this;
 
 		// Auth control
-		$scope.isLoggedIn = auth.isLoggedIn;
+		vm.isLoggedIn = auth.isLoggedIn;
 
 		// Tabs
-		$scope.tab = 'newPoll';
-		$scope.isSet = function (tab) {
-			return $scope.tab === tab;
+		vm.tab = 'newPoll';
+		vm.isSet = function (tab) {
+			return vm.tab === tab;
 		};
-		$scope.setTab = function (tab) {
-			$scope.tab = tab;
+		vm.setTab = function (tab) {
+			vm.tab = tab;
 		};
 
 		// Add option
 		var addOptionCounter = 2, // number of inputs (default: 2)
 			newPollForm = angular.element('.options'); //get new poll form
 
-		$scope.addOption = function () {
+		vm.addOption = function () {
 			// new input
 			var newOption = "<div class='form-group'> <input required maxlength='70' class='form-control' type='text' id='inputSmall' placeholder='Option' ng-model='newPoll.options[" + addOptionCounter + "].name'> </div>";
 
-			newPollForm.append($compile(newOption)($scope));
+			newPollForm.append($compile(newOption)(vm));
 
 			addOptionCounter++;
 		};
@@ -35,42 +39,41 @@
 
 		//	My polls
 
-		$scope.myPolls = pollsPromise.data;
-		$scope.noPolls = $scope.myPolls.length === 0 ? true : false;
-		$scope.deletePoll = function (pollId) {
+		vm.myPolls = polls.polls;
+		//vm.noPolls = vm.myPolls.length === 0 ? true : false;
+		vm.deletePoll = function (pollId) {
 			polls.deletePoll(pollId);
-			$scope.noPolls = polls.polls.length === 0 ? true : false;
+			vm.noPolls = myPolls.polls.length === 0 ? true : false;
 		};
 
 		//	Filters
-		$scope.order = 'date';
-		$scope.search = '';
-		/*$scope.limit = 5;
-$scope.loadMore = function () {
-	$scope.limit += $scope.limit;
+		vm.order = 'date';
+		vm.search = '';
+		/*vm.limit = 5;
+vm.loadMore = function () {
+	vm.limit += vm.limit;
 };*/
 
 		//	New poll
-		$scope.newPoll = {
+		vm.newPoll = {
 			options: []
 		};
 
-		$scope.createPoll = function () {
+		vm.createPoll = function () {
 
-			$scope.newPoll.date = new Date();
+			vm.newPoll.date = new Date();
 
-			polls.createPoll($scope.newPoll)
+			polls.createPoll(vm.newPoll)
 				.error(function (error) {
-					$scope.error = error;
+					vm.error = error;
 				})
 				.success(function (poll) {
-					$scope.poll = poll;
-					$scope.myPolls.push(poll);
-					$scope.noPolls = $scope.myPolls.length === 0 ? true : false;
+					vm.poll = poll;
+					vm.noPolls = vm.myPolls.length === 0 ? true : false;
 				});
 
 			// Reset form
-			$scope.newPoll = {
+			vm.newPoll = {
 				options: []
 			};
 

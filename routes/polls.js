@@ -52,5 +52,21 @@ router.post('/create', auth, function (req, res, next) {
 
 });
 
+// Delete poll
+router.delete('/:id', auth, function (req, res, next) {
+
+	var poll = Poll.remove({
+		_id: req.params.id
+	}, function (err) {
+		if (err) {
+			return next(err);
+		}
+		return res.json({
+			message: 'Poll deleted'
+		});
+	});
+
+});
+
 
 module.exports = router;

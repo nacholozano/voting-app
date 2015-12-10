@@ -19,6 +19,8 @@
 				headers: {
 					Authorization: 'Bearer ' + auth.getToken()
 				}
+			}).success(function (poll) {
+				service.polls.push(poll);
 			});
 		};
 
@@ -36,10 +38,11 @@
 		};
 
 		service.deletePoll = function (pollId) {
-			var pollIndex = service.polls.findIndex(function (e) {
-				return e.id === pollId;
+			return $http.delete('/' + pollId, {
+				headers: {
+					Authorization: 'Bearer ' + auth.getToken()
+				}
 			});
-			service.polls.splice(pollIndex, 1);
 		};
 
 		service.getPoll = function (pollId) {

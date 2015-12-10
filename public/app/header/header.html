@@ -1,4 +1,4 @@
-<div class="navbar navbar-default" ng-controller='HeaderCtrl'>
+<div class="navbar navbar-default" ng-controller='HeaderCtrl as header'>
 
 	<div class="container">
 
@@ -17,16 +17,16 @@
 		<div class="navbar-collapse collapse navbar-inverse-collapse">
 			<ul class="nav navbar-nav navbar-right">
 
-				<li ng-hide='isLoggedIn()'><a href="/#/login">Log In</a></li>
-				<li ng-hide='isLoggedIn()'><a href="/#/register">Register</a></li>
-				<li><a>{{ currentUser().username }}</a></li>
+				<li ng-hide='header.isLoggedIn()'><a href="/#/login">Log In</a></li>
+				<li ng-hide='header.isLoggedIn()'><a href="/#/register">Register</a></li>
+				<li><a>{{ header.currentUser().username }}</a></li>
 
-				<li ng-show='isLoggedIn()' class="dropdown">
+				<li ng-show='header.isLoggedIn()' class="dropdown">
 					<a href="bootstrap-elements.html" data-target="#" class="dropdown-toggle" data-toggle="dropdown">Options
 						<b class="caret"></b></a>
 					<ul class="dropdown-menu">
 						<li><a href="/#/settings">Change Password</a></li>
-						<li><a href="" ng-click='logOut()'>Log Out</a></li>
+						<li><a href="" ng-click='header.logOut()'>Log Out</a></li>
 					</ul>
 				</li>
 

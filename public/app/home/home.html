@@ -1,6 +1,6 @@
 <div class="home">
 
-	<div ng-hide='isLoggedIn()' class='welcome'>
+	<div ng-hide='home.isLoggedIn()' class='welcome'>
 
 		<div class="container-fluid">
 
@@ -16,28 +16,28 @@
 
 	</div>
 
-	<div ng-show='isLoggedIn()' class="dashboard">
+	<div ng-show='home.isLoggedIn()' class="dashboard">
 
 		<div class="container">
 
 			<h2>Dashboard</h2>
 
 			<div class="btn-group btn-group-justified btn-group-raised">
-				<a href="" class="btn" ng-click='setTab("newPoll")' ng-class="{ actived:isSet('newPoll') }">New poll</a>
-				<a href="" class="btn" ng-click='setTab("myPolls")' ng-class="{ actived:isSet('myPolls') }">My polls</a>
+				<a href="" class="btn" ng-click='home.setTab("newPoll")' ng-class="{ actived:home.isSet('newPoll') }">New poll</a>
+				<a href="" class="btn" ng-click='home.setTab("myPolls")' ng-class="{ actived:home.isSet('myPolls') }">My polls</a>
 			</div>
 
 			<div class="content">
 
 				<!-- New poll -->
 
-				<section id="newPoll" ng-show='isSet("newPoll")'>
+				<section id="newPoll" ng-show='home.isSet("newPoll")'>
 
-					<form ng-submit='createPoll()'>
+					<form ng-submit='home.createPoll()'>
 
 						<div class="form-group">
 							<label class="control-label" for="namePoll">Name your poll</label>
-							<input maxlength='120' type="text" class="form-control" id="namePoll" required ng-model='newPoll.name'>
+							<input maxlength='120' type="text" class="form-control" id="namePoll" required ng-model='home.newPoll.name'>
 						</div>
 
 						<div class="options">
@@ -45,46 +45,46 @@
 							<p>Options</p>
 
 							<div class="form-group">
-								<input required maxlength='80' class="form-control" type="text" id="inputSmall" placeholder="Option" ng-model='newPoll.options[0].name'>
+								<input required maxlength='80' class="form-control" type="text" id="inputSmall" placeholder="Option" ng-model='home.newPoll.options[0].name'>
 							</div>
 							<div class="form-group">
-								<input required maxlength='80' class="form-control" type="text" id="inputSmall" placeholder="Option" ng-model='newPoll.options[1].name'>
+								<input required maxlength='80' class="form-control" type="text" id="inputSmall" placeholder="Option" ng-model='home.newPoll.options[1].name'>
 							</div>
 
 						</div>
 
-						<button type='button' class='btn btn-lg' ng-click='addOption()'>New option</button>
+						<button type='button' class='btn btn-lg' ng-click='home.addOption()'>New option</button>
 						<button type='submit' class='btn btn-lg'>Submit</button>
 
 					</form>
 					<br>
 					<br>
 
-					<div ng-show='poll' class="alert alert-dismissible alert-success">
+					<div ng-show='home.poll' class="alert alert-dismissible alert-success">
 						<button type="button" class="close" data-dismiss="alert">×</button>
 						<strong>Poll has been created</strong>
 						<p>You can access the poll in the next link
-							<br> <a href="/#/polls/">{{poll._id}}</a>
+							<br> <a href="/#/polls/">{{home.poll._id}}</a>
 						</p>
 					</div>
 
-					<div ng-show='error' class="alert alert-dismissible alert-danger">
+					<div ng-show='home.error' class="alert alert-dismissible alert-danger">
 						<button type="button" class="close" data-dismiss="alert">×</button>
-						<strong>{{error}}</strong>
+						<strong>{{home.error}}</strong>
 					</div>
 
 				</section>
 
 				<!-- My polls -->
 
-				<section id="myPolls" ng-show='isSet("myPolls")'>
+				<section id="myPolls" ng-show='home.isSet("myPolls")'>
 
-					<div ng-hide='noPolls' class="row search">
+					<div class="row search">
 						<div class="col-md-4 col-md-offset-1 col-sm-4 col-sm-offset-1 col-xs-12">
 							<div class="form-group">
 								<div>
 									<label for="search" class="control-label">Search</label>
-									<input ng-model='search.name' type="text" class="form-control" id="search">
+									<input ng-model='home.search' type="text" class="form-control" id="search">
 
 								</div>
 
@@ -95,7 +95,7 @@
 							<div class="form-group">
 								<label for="orderBy" class="control-label">Order by</label>
 								<div>
-									<select ng-model='order' id="orderBy" class="form-control">
+									<select ng-model='home.order' id="orderBy" class="form-control">
 										<option value="date">Newest first</option>
 										<option value="-totalVotes">Total votes</option>
 									</select>
@@ -105,7 +105,7 @@
 						</div>
 					</div>
 
-					<div ng-hide='noPolls' class="table-responsive">
+					<div class="table-responsive">
 
 						<table class="table table-striped table-hover">
 							<thead>
@@ -116,7 +116,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr ng-repeat='poll in myPolls | orderBy: order | filter: search | limitTo: limit'>
+								<tr ng-repeat='poll in home.myPolls | orderBy: home.order | filter: home.search | limitTo: home.limit'>
 									<td> <a ng-href="/#/polls/{{poll.id}}">{{poll.name}}</a> </td>
 									<td>{{poll.totalVotes}}</td>
 									<td>
@@ -132,7 +132,7 @@
 						<a href=' ' class="btn btn-lg loadMore">Load more</a>
 					</div> -->
 
-					<h3 ng-show='noPolls ' class="noPolls">No polls</h3>
+					<!--<h3 ng-show='noPolls ' class="noPolls">No polls</h3>-->
 
 				</section>
 

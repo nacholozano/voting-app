@@ -1,5 +1,8 @@
 ;
 (function () {
+
+	'use strict';
+
 	angular
 		.module('votingApp', ['ui.router'])
 
@@ -15,6 +18,7 @@
 				url: '/home',
 				templateUrl: 'app/home/home.html',
 				controller: 'HomeCtrl',
+				controllerAs: 'home',
 				resolve: {
 					pollsPromise: ['polls', function (polls) {
 						return polls.getAll();
@@ -23,8 +27,9 @@
 			})
 			.state('login', {
 				url: '/login',
-				templateUrl: 'app/sign/login.html',
-				controller: 'AuthCtrl',
+				templateUrl: 'app/login/login.html',
+				controller: 'LoginCtrl',
+				controllerAs: 'login',
 				onEnter: ['$state', 'auth', function ($state, auth) {
 					if (auth.isLoggedIn()) {
 						$state.go('home');
@@ -33,8 +38,9 @@
 			})
 			.state('register', {
 				url: '/register',
-				templateUrl: 'app/sign/register.html',
-				controller: 'AuthCtrl',
+				templateUrl: 'app/register/register.html',
+				controller: 'RegisterCtrl',
+				controllerAs: 'register',
 				onEnter: ['$state', 'auth', function ($state, auth) {
 					if (auth.isLoggedIn()) {
 						$state.go('home');

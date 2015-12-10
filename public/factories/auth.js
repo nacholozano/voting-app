@@ -1,6 +1,8 @@
 ;
 (function () {
 
+	'use strict';
+
 	angular.module('votingApp')
 		.factory('auth', ['$http', '$window', '$state', auth]);
 
