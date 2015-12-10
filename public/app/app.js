@@ -19,11 +19,13 @@
 				templateUrl: 'app/home/home.html',
 				controller: 'HomeCtrl',
 				controllerAs: 'home',
-				resolve: {
-					pollsPromise: ['polls', function (polls) {
-						return polls.getAll();
+				/*resolve: {
+	pollsPromise: ['polls', 'auth', function (polls) {
+		if (auth.isLoggedIn()) {
+			return polls.getAll();
+		}
 					}]
-				}
+}*/
 			})
 			.state('login', {
 				url: '/login',
@@ -51,12 +53,12 @@
 				url: '/settings',
 				templateUrl: 'app/settings/settings.html',
 				controller: 'SettingsCtrl',
+				controllerAs: 'settings',
 				onEnter: ['$state', 'auth', function ($state, auth) {
 					if (!auth.isLoggedIn()) {
 						$state.go('home');
 					}
 				}]
-
 			})
 			.state('polls', {
 				url: '/polls/:id',

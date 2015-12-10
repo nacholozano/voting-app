@@ -8,9 +8,9 @@ var auth = jwt({
 	userProperty: 'payload'
 });
 
-Poll.remove({}, function (err) {
+/*Poll.remove({}, function (err) {
 	console.log('collection removed')
-});
+});*/
 
 // Get polls
 router.get('/', auth, function (req, res, next) {
@@ -57,7 +57,7 @@ router.delete('/:id', auth, function (req, res, next) {
 
 	var poll = Poll.remove({
 		_id: req.params.id
-	}, function (err) {
+	}, function (err, removed) {
 		if (err) {
 			return next(err);
 		}

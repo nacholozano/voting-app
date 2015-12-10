@@ -8,17 +8,30 @@
 
 	function auth($http, $window, $state) {
 
-		var service = {};
+		var service = {
+			saveToken: saveToken,
+			getToken: getToken,
+			isLoggedIn: isLoggedIn,
+			currentUser: currentUser,
+			register: register,
+			login: login,
+			logOut: logOut,
+			update: update,
+		};
 
-		service.saveToken = function (token) {
+		return service;
+
+		//////////////////////////
+
+		function saveToken(token) {
 			$window.localStorage['voting-app-token'] = token;
 		};
 
-		service.getToken = function () {
+		function getToken() {
 			return $window.localStorage['voting-app-token'];
 		};
 
-		service.isLoggedIn = function () {
+		function isLoggedIn() {
 			var token = service.getToken();
 
 			if (token) {
@@ -30,7 +43,7 @@
 
 		};
 
-		service.currentUser = function () {
+		function currentUser() {
 			if (service.isLoggedIn()) {
 				var token = service.getToken();
 				var payload = JSON.parse($window.atob(token.split('.')[1]));
@@ -38,24 +51,24 @@
 			}
 		};
 
-		service.register = function (user) {
+		function register(user) {
 			return $http.post('/user/register', user).success(function (data) {
 				service.saveToken(data.token);
 			});
 		};
 
-		service.login = function (user) {
+		function login(user) {
 			return $http.post('/user/login', user).success(function (data) {
 				service.saveToken(data.token);
 			});
 		};
 
-		service.logOut = function () {
+		function logOut() {
 			$window.localStorage.removeItem('voting-app-token');
 			$state.go('home');
 		};
 
-		service.update = function (data) {
+		function update(data) {
 			return $http.put('/user/update', data, {
 				headers: {
 					Authorization: 'Bearer ' + service.getToken()
@@ -63,7 +76,6 @@
 			});
 		};
 
-		return service;
 	};
 
 })();

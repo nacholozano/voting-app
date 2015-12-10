@@ -1,20 +1,31 @@
 ;
 (function () {
 
+	'use strict';
+
 	angular.module('votingApp')
 		.factory('polls', ['auth', '$http', polls]);
 
 	function polls(auth, $http) {
 		var service = {
-			polls: []
+			polls: [],
+			createPoll: createPoll,
+			getAll: getAll,
+			deletePoll: deletePoll,
+			getPoll: getPoll,
+			votePoll: votePoll,
 		};
+
+		return service;
+
+		///////////////////////
 
 		/**
 		 * Create new custom poll
 		 * @param   {[[json object]]} newPoll {[[Object with new poll data]]}
 		 * @returns {[[json object]]} [[Error or poll just created]]
 		 */
-		service.createPoll = function (newPoll) {
+		function createPoll(newPoll) {
 			return $http.post('/polls/create', newPoll, {
 				headers: {
 					Authorization: 'Bearer ' + auth.getToken()
@@ -27,7 +38,7 @@
 		/**
 		 * Get all polls
 		 */
-		service.getAll = function () {
+		function getAll() {
 			return $http.get('/polls', {
 				headers: {
 					Authorization: 'Bearer ' + auth.getToken()
@@ -37,22 +48,27 @@
 			});
 		};
 
-		service.deletePoll = function (pollId) {
-			return $http.delete('/' + pollId, {
+		function deletePoll(pollId) {
+			return $http.delete('/polls/' + pollId, {
 				headers: {
 					Authorization: 'Bearer ' + auth.getToken()
 				}
+			}).success(function (message) {
+				var pollIndex = service.polls.findIndex(function (e) {
+					return e.id === pollId;
+				});
+				service.polls.splice(pollIndex, 1);
 			});
 		};
 
-		service.getPoll = function (pollId) {
+		function getPoll(pollId) {
 			var poll = service.polls.find(function (e) {
 				return e.id === pollId;
 			});
 			return poll;
 		};
 
-		service.votePoll = function (pollId, optionVoteId) {
+		function votePoll(pollId, optionVoteId) {
 
 			var pollIndex = service.polls.findIndex(function (e) {
 				return e.id === pollId;
@@ -66,7 +82,6 @@
 
 		};
 
-		return service;
 	}
 
 })();
