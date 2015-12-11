@@ -9,8 +9,6 @@
 
 	function HomeCtrl(polls, $compile, auth, $scope) {
 
-		//var $scope = this;
-
 		// Auth control
 		$scope.isLoggedIn = auth.isLoggedIn;
 
@@ -34,33 +32,20 @@
 			newPollForm.append($compile(newOption)($scope));
 
 			addOptionCounter++;
+			/*$scope.newPoll.options.push({
+				id: addOptionCounter
+			});*/
 		};
-
-
-		//	My polls
-		polls.getAll();
-		$scope.myPolls = polls.polls;
-		//$scope.noPolls = $scope.myPolls.length === 0 ? true : false;
-		$scope.deletePoll = function (pollId) {
-			polls.deletePoll(pollId).success(function (message) {
-				$scope.message = message.message;
-			}).error(function (error) {
-				$scope.error = error;
-			});
-			//$scope.noPolls = myPolls.polls.length === 0 ? true : false;
-		};
-
-		//	Filters
-		$scope.order = 'date';
-		$scope.search = '';
-		/*$scope.limit = 5;
-$scope.loadMore = function () {
-	$scope.limit += $scope.limit;
-};*/
 
 		//	New poll
 		$scope.newPoll = {
-			options: []
+			options: [
+				/*{
+								id: 1
+							}, {
+								id: 2
+							}*/
+				]
 		};
 
 		$scope.createPoll = function () {
@@ -73,7 +58,7 @@ $scope.loadMore = function () {
 				})
 				.success(function (poll) {
 					$scope.poll = poll;
-					//$scope.noPolls = $scope.myPolls.length === 0 ? true : false;
+					$scope.noPolls = false;
 				});
 
 			// Reset form
@@ -81,6 +66,27 @@ $scope.loadMore = function () {
 				options: []
 			};
 
+		};
+
+		//	Filters
+		$scope.order = 'date';
+		$scope.search = '';
+		/*$scope.limit = 5;
+$scope.loadMore = function () {
+	$scope.limit += $scope.limit;
+};*/
+
+		//	My polls
+		polls.getAll();
+		$scope.myPolls = polls.polls;
+		$scope.isEmpty = polls.isEmpty;
+
+		$scope.deletePoll = function (pollId) {
+			polls.deletePoll(pollId).success(function (message) {
+				$scope.message = message.message;
+			}).error(function (error) {
+				$scope.error = error;
+			});
 		};
 
 	};

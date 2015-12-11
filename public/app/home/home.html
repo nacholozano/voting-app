@@ -33,7 +33,7 @@
 
 				<section id="newPoll" ng-show='isSet("newPoll")'>
 
-					<form ng-submit='createPoll()'>
+					<form ng-submit='createPoll()' class="formCreatePoll">
 
 						<div class="form-group">
 							<label class="control-label" for="namePoll">Name your poll</label>
@@ -61,88 +61,85 @@
 					<br>
 
 					<div ng-show='poll' class="alert alert-dismissible alert-success">
-						<button type="button" class="close" data-dismiss="alert">×</button>
 						<strong>Poll has been created</strong>
 						<p>You can access the poll in the next link
-							<br> <a href="/#/polls/">{{poll._id}}</a>
+							<br> <a ng-href="/#/polls/{{poll._id}}">{{poll._id}}</a>
 						</p>
 					</div>
 
 					<div ng-show='error' class="alert alert-dismissible alert-danger">
-						<button type="button" class="close" data-dismiss="alert">×</button>
 						<strong>{{error}}</strong>
 					</div>
-
 				</section>
 
 				<!-- My polls -->
 
 				<section id="myPolls" ng-show='isSet("myPolls")'>
 
-					<div class="row search">
-						<div class="col-md-4 col-md-offset-1 col-sm-4 col-sm-offset-1 col-xs-12">
-							<div class="form-group">
-								<div>
-									<label for="search" class="control-label">Search</label>
-									<input ng-model='search' type="text" class="form-control" id="search">
+					<div ng-hide='isEmpty()' class="myPollsTable">
 
+						<div class="row search">
+							<div class="col-md-4 col-md-offset-1 col-sm-4 col-sm-offset-1 col-xs-12">
+								<div class="form-group">
+									<div>
+										<label for="search" class="control-label">Search</label>
+										<input ng-model='search' type="text" class="form-control" id="search">
+
+									</div>
+
+								</div>
+							</div>
+
+							<div class="col-md-4 col-md-offset-2 col-sm-4 col-sm-offset-2 col-xs-12">
+								<div class="form-group">
+									<label for="orderBy" class="control-label">Order by</label>
+									<div>
+										<select ng-model='order' id="orderBy" class="form-control">
+											<option value="date">Newest first</option>
+											<option value="-totalVotes">Total votes</option>
+										</select>
+									</div>
 								</div>
 
 							</div>
 						</div>
 
-						<div class="col-md-4 col-md-offset-2 col-sm-4 col-sm-offset-2 col-xs-12">
-							<div class="form-group">
-								<label for="orderBy" class="control-label">Order by</label>
-								<div>
-									<select ng-model='order' id="orderBy" class="form-control">
-										<option value="date">Newest first</option>
-										<option value="-totalVotes">Total votes</option>
-									</select>
-								</div>
-							</div>
+						<div class="table-responsive">
+
+							<table class="table table-striped table-hover">
+								<thead>
+									<tr>
+										<th>Poll name</th>
+										<th>Total votes</th>
+										<th>Operation</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat='poll in myPolls | orderBy: order | filter: search | limitTo: limit'>
+										<td> <a ng-href="/#/polls/{{poll._id}}">{{poll.name}}</a> </td>
+										<td>{{poll.totalVotes}}</td>
+										<td>
+											<button ng-click='deletePoll(poll._id)'>Delete</button>
+										</td>
+									</tr>
+								</tbody>
+							</table>
 
 						</div>
+						<!-- <div class="loadDiv">
+						<a href=' ' class="btn btn-lg loadMore">Load more</a>
+					</div> -->
 					</div>
 
-					<div class="table-responsive">
-
-						<table class="table table-striped table-hover">
-							<thead>
-								<tr>
-									<th>Poll name</th>
-									<th>Total votes</th>
-									<th>Operation</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr ng-repeat='poll in myPolls | orderBy: order | filter: search | limitTo: limit'>
-									<td> <a ng-href="/#/polls/{{poll.id}}">{{poll.name}}</a> </td>
-									<td>{{poll.totalVotes}}</td>
-									<td>
-										<button ng-click='deletePoll(poll._id)'>Delete</button>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-
-					</div>
+					<h3 ng-show='isEmpty()' class="noPolls">No polls</h3>
 
 					<div ng-show='message' class="alert alert-dismissible alert-success">
-						<button type="button" class="close" data-dismiss="alert">×</button>
 						<strong>{{message}}</strong>
 					</div>
 
 					<div ng-show='error' class="alert alert-dismissible alert-danger">
-						<button type="button" class="close" data-dismiss="alert">×</button>
 						<strong>{{error}}</strong>
 					</div>
-
-					<!-- <div class="loadDiv">
-						<a href=' ' class="btn btn-lg loadMore">Load more</a>
-					</div> -->
-
-					<!--<h3 ng-show='noPolls' class="noPolls">No polls</h3>-->
 
 				</section>
 

@@ -3,22 +3,25 @@
 
 	angular.module('votingApp')
 
-	.controller('PollCtrl', ['$scope', '$state', '$stateParams', 'polls', PollCtrl]);
+	.controller('PollCtrl', ['$scope', 'auth', '$state', '$stateParams', 'polls', 'pollPromise', PollCtrl]);
 
-	function PollCtrl($scope, $state, $stateParams, polls) {
+	function PollCtrl($scope, auth, $state, $stateParams, polls, pollPromise) {
 
-		$scope.poll = polls.getPoll( parseInt($stateParams.id) );
+		$scope.poll = pollPromise.data;
 
 		// Delete poll
-		$scope.deletePoll = function (pollId) {
-			polls.deletePoll(pollId);
+		$scope.deletePoll = function () {
+			polls.deletePoll($scope._id);
 			$state.go('dashboard');
 		};
 
 		// Vote
-		$scope.optionVoteId = 1;
-		$scope.votePoll = function( pollId , optionVoteId ){
-			polls.votePoll( pollId , optionVoteId );
+		$scope.optionVoteId = '';
+		$scope.votePoll = function () {
+			polls.votePoll($scope.poll, $scope.optionVoteId)
+				.error(function (error) {
+					$scope.error = error;
+				});
 		};
 
 	};

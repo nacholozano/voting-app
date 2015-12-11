@@ -13,14 +13,14 @@
 
 			auth.update(vm.data)
 				.error(function (error) {
-					//vm.success = '';
+					vm.success = '';
 					vm.error = error;
 					if (vm.error.message === 'Incorrect current password') {
 						vm.data.currentPassword = '';
 					}
 				})
 				.success(function (data) {
-					//vm.error = '';
+					vm.error = '';
 					vm.success = data;
 					vm.data = {};
 				});

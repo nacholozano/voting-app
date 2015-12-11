@@ -17,7 +17,6 @@
 			auth.login(vm.user)
 				.error(function (err) {
 					vm.error = err;
-					console.log(vm.error);
 					if (vm.error.message === 'Incorrect password') {
 						vm.user.password = ''; // Incorrect password
 					} else {

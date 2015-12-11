@@ -60,10 +60,15 @@
 					}
 				}]
 			})
-			.state('polls', {
-				url: '/polls/:id',
+			.state('poll', {
+				url: '/polls/:poll',
 				templateUrl: 'app/poll/poll.html',
 				controller: 'PollCtrl',
+				resolve: {
+					pollPromise: ['polls', '$stateParams', function (polls, $stateParams) {
+						return polls.getPoll($stateParams.poll);
+					}]
+				}
 			});
 
 

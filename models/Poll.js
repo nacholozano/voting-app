@@ -9,7 +9,8 @@ var PollSchema = new mongoose.Schema({
 	date: Date,
 	name: String,
 	options: [{
-		id: Number,
+		//id: Number,
+		name: String,
 		option: String,
 		votes: {
 			type: Number,
@@ -27,13 +28,16 @@ var PollSchema = new mongoose.Schema({
 
 });
 
-PollSchema.methods.vote = function (voterId, optionId) {
-	var optionIndex = this.options.findIndex({
-		id: optionId
-	});
+PollSchema.methods.vote = function (voterId, optionId, callback) {
+
+	var optionIndex = this.options.map(function (option) {
+		return option._id.toString();
+	}).indexOf(optionId.toString());
+
 	this.options[optionIndex].votes += 1;
 	this.totalVotes += 1;
 	this.voters.push(voterId);
+	this.save(callback);
 };
 
 mongoose.model('Poll', PollSchema);

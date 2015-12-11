@@ -6,26 +6,23 @@
 
 		<section class="vote">
 
-			<form ng-submit='votePoll(poll.id,optionVoteId)'>
+			<form ng-submit='votePoll()'>
 
 				<div class="form-group">
 
 					<div class="radio" ng-repeat='option in poll.options'>
 
-						<label for='option{{option.id}}'>
+						<label for='option{{option._id}}'>
 
-							<input type="radio"
-							ng-model='$parent.optionVoteId'
-							ng-value="option.id"
-							id="option{{option.id}}"
-							name="optionsRadios" > {{option.name}}
+							<input type="radio" ng-model='$parent.optionVoteId' ng-value="option._id" id="option{{option._id}}" name="optionsRadios" required> {{option.name}}
+
 						</label>
 
 					</div>
 
-				</div>
+					<button type='submit' class='btn btn-lg'>Submit</button>
 
-				<button type='submit' class='btn btn-lg'>Submit</button>
+				</div>
 
 			</form>
 
@@ -40,8 +37,9 @@
 				<div ng-repeat='option in poll.options | orderBy: "-votes" '>
 
 					<p class='optionPercent'>
-						<span>{{option.name}}</span>
-						<span>{{option.votes*100/poll.totalVotes | number:2 }} %</span>
+						<span>{{option.name}}  </span>
+						<span>Votes: {{option.votes}}</span>
+						<span>Percents: {{option.votes*100/poll.totalVotes || 0 | number:2 }} %</span>
 					</p>
 
 					<div class="progress">

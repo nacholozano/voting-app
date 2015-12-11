@@ -16,7 +16,7 @@ var auth = jwt({
 router.get('/', auth, function (req, res, next) {
 
 	var polls = Poll.find({})
-		.limit(req.params.limit)
+		//.limit(req.params.limit)
 		.sort({
 			date: -1
 		});
@@ -29,8 +29,40 @@ router.get('/', auth, function (req, res, next) {
 			return next(new Error("No polls"));
 		}
 
-		return res.json(polls);
+		res.json(polls);
 
+	});
+
+});
+
+// Get specific poll
+router.get('/:poll', function (req, res, next) {
+
+	res.json(req.poll);
+	/*
+		Poll.findById(req.params.id, function (err, poll) {
+			if (err) {
+				return next(err);
+			}
+
+			if (!poll) {
+				return next(new Error("Poll doesn't found"));
+			}
+
+			res.json(poll);
+
+		});
+	*/
+});
+
+// Upvote
+router.put('/:poll/vote/:option', auth, function (req, res, next) {
+
+	req.poll.vote(req.payload._id, req.params.option, function (err, poll) {
+		if (err) {
+			return next(err);
+		}
+		res.json(poll);
 	});
 
 });
@@ -43,10 +75,10 @@ router.post('/create', auth, function (req, res, next) {
 
 	poll.save(function (err, poll) {
 		if (err) {
-			next(err);
+			return next(err);
 		}
 
-		return res.json(poll);
+		res.json(poll);
 
 	});
 
@@ -61,12 +93,29 @@ router.delete('/:id', auth, function (req, res, next) {
 		if (err) {
 			return next(err);
 		}
-		return res.json({
+		res.json({
 			message: 'Poll deleted'
 		});
 	});
 
 });
 
+/////////////////
+
+router.param('poll', function (req, res, next, id) {
+	var query = Poll.findById(id);
+
+	query.exec(function (err, poll) {
+		if (err) {
+			return next(err);
+		}
+		if (!poll) {
+			return next(new Error('Cant find poll'))
+		}
+		req.poll = poll;
+		return next();
+	});
+
+});
 
 module.exports = router;
