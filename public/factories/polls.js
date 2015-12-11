@@ -34,7 +34,7 @@
 		};
 
 		function getAll() {
-			return $http.get('/polls', service.authToken)
+			return $http.get('/polls/', service.authToken)
 				.success(function (polls) {
 					angular.copy(polls, service.polls);
 					return polls;
@@ -43,9 +43,9 @@
 
 		function deletePoll(pollId) {
 			return $http.delete('/polls/' + pollId, service.authToken)
-				.success(function (message) {
+				.success(function () {
 					var pollIndex = service.polls.findIndex(function (e) {
-						return e.id === pollId;
+						return e._id === pollId;
 					});
 					service.polls.splice(pollIndex, 1);
 				});

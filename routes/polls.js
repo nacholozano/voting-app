@@ -8,15 +8,16 @@ var auth = jwt({
 	userProperty: 'payload'
 });
 
-Poll.remove({}, function (err) {
+/*Poll.remove({}, function (err) {
 	console.log('collection removed')
-});
+});*/
 
 // Get polls
 router.get('/', auth, function (req, res, next) {
 
-	var polls = Poll.find({})
-		//.limit(req.params.limit)
+	var polls = Poll.find({
+			author: req.payload._id
+		})
 		.sort({
 			date: -1
 		});
@@ -39,20 +40,7 @@ router.get('/', auth, function (req, res, next) {
 router.get('/:poll', function (req, res, next) {
 
 	res.json(req.poll);
-	/*
-		Poll.findById(req.params.id, function (err, poll) {
-			if (err) {
-				return next(err);
-			}
 
-			if (!poll) {
-				return next(new Error("Poll doesn't found"));
-			}
-
-			res.json(poll);
-
-		});
-	*/
 });
 
 // Upvote
