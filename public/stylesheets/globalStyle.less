@@ -253,26 +253,33 @@ main {
 }
 
 .totalVotes,
-.percent {
-	margin-top: 35px;
+.info {
+	margin: 40px 0;
 }
 
 .totalVotes {
 	font-size: 1.8rem;
 }
 
-.progress .progress-bar {
-	background-color: black;
+.progress {
+	margin-top: 25px;
+	margin-bottom: 35px;
+	.progress-bar {
+		background-color: black;
+	}
 }
 
 .info+.btn.btn-lg {
-	margin-bottom: 30px;
+	margin-top: 0 !important;
 }
 
 .optionPercent {
-	span:first-child {
+	span {
 		font-size: 2rem;
 	}
+}
+
+.optionPercent+p {
 	span {
 		margin-right: 3%;
 	}

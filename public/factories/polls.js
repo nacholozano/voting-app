@@ -62,26 +62,7 @@
 		};
 
 		function votePoll(poll, optionVoteId) {
-			return $http.put('/polls/' + poll._id + '/vote/' + optionVoteId, null, service.authToken)
-				.success(function (data) {
-					var optionIndex = service.polls.findIndex(function (e) {
-						return e._id === optionVoteId;
-					});
-
-					poll.options[optionIndex].votes += 1;
-					poll.totalVotes += 1;
-				});
-
-			/*var pollIndex = service.polls.findIndex(function (e) {
-	return e.id === pollId;
-});
-var optionIndex = service.polls[pollIndex].options.findIndex(function (e) {
-	return e.id === optionVoteId;
-});
-
-service.polls[pollIndex].options[optionIndex].votes += 1;
-service.polls[pollIndex].totalVotes += 1;*/
-
+			return $http.put('/polls/' + poll._id + '/vote/' + optionVoteId, null, service.authToken);
 		};
 
 		function isEmpty() {

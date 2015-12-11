@@ -3,8 +3,7 @@
 	<div class="container">
 
 		<h2>{{poll.name}}</h2>
-
-		<section class="vote">
+		<section ng-hide='pollVoted()' class="vote">
 
 			<form ng-submit='votePoll()'>
 
@@ -28,33 +27,31 @@
 
 		</section>
 
-		<section class="info">
+		<section ng-show='pollVoted()' class="info">
 
-			<section class="percent">
+			<!--<h3>Percents</h3>-->
 
-				<!--<h3>Percents</h3>-->
+			<div ng-repeat='option in poll.options | orderBy: "-votes" '>
 
-				<div ng-repeat='option in poll.options | orderBy: "-votes" '>
+				<p class='optionPercent'>
+					<span>{{option.name}}  </span>
+				</p>
+				<p>
+					<span>Votes: {{option.votes}}</span>
+					<span>Percents: {{option.votes*100/poll.totalVotes || 0 | number:2 }} %</span>
+				</p>
 
-					<p class='optionPercent'>
-						<span>{{option.name}}  </span>
-						<span>Votes: {{option.votes}}</span>
-						<span>Percents: {{option.votes*100/poll.totalVotes || 0 | number:2 }} %</span>
-					</p>
-
-					<div class="progress">
-						<div class="progress-bar" ng-style="{'width': (option.votes*100/poll.totalVotes)+'%' }"></div>
-					</div>
-
+				<div class="progress">
+					<div class="progress-bar" ng-style="{'width': (option.votes*100/poll.totalVotes)+'%' }"></div>
 				</div>
 
-			</section>
+			</div>
 
 			<p class="totalVotes"> Total votes: <span> {{poll.totalVotes}} </span> </p>
 
 		</section>
 
-		<button type='submit' class='btn btn-lg' ng-click='deletePoll(poll.id)'>Delete</button>
+		<button ng-show='isAuthor()' type='submit' class='btn btn-lg' ng-click='deletePoll(poll.id)'>Delete</button>
 
 	</div>
 
