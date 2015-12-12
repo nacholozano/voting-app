@@ -10,7 +10,7 @@ var UserSchema = new mongoose.Schema({
 		unique: true,
 		validate: {
 			validator: function (v) {
-				return /^.+[@].+[.].+$/.test(v);
+				return /^.+[@].+[\.].+$/.test(v);
 			},
 			message: '{VALUE} is not a valid email!'
 		}
@@ -21,16 +21,29 @@ var UserSchema = new mongoose.Schema({
 
 });
 
+/**
+ * Encrypt and set user's password
+ * @param {String} password
+ */
 UserSchema.methods.setPassword = function (password) {
 	this.salt = crypto.randomBytes(16).toString('hex');
 	this.hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64).toString('hex');
 };
 
+/**
+ * Valid password
+ * @param   {String} password Password to validate
+ * @returns {Boolean} Return true if the password matches
+ */
 UserSchema.methods.validPassword = function (password) {
 	var hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64).toString('hex');;
 	return this.hash === hash;
 };
 
+/**
+ * Generate and sign JSON WEB TOKEN
+ * @returns {JSON} Return the JWT signed (user,id and expiration date)
+ */
 UserSchema.methods.generateJWT = function () {
 	var today = new Date();
 	var exp = new Date(today); // equal dates

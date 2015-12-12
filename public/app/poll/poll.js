@@ -17,8 +17,9 @@
 
 		// Vote
 		$scope.optionVoteId = '';
+
 		$scope.votePoll = function () {
-			polls.votePoll($scope.poll, $scope.optionVoteId)
+			polls.votePoll($scope.poll._id, $scope.optionVoteId)
 				.error(function (error) {
 					$scope.error = error;
 				}).success(function (poll) {
@@ -26,12 +27,14 @@
 				});
 		};
 
+		// Check if poll is voted by current user
 		$scope.pollVoted = function () {
 			return $scope.poll.voters.find(function (voter) {
 				return voter.toString() === auth.currentUser()._id.toString();
 			});
 		};
 
+		/// chekc if current user is poll author
 		$scope.isAuthor = function () {
 			return $scope.poll.author.toString() === auth.currentUser()._id.toString();
 		};

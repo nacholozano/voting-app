@@ -24,8 +24,14 @@
 
 		return service;
 
-		///////////////////////
+		/////////////////////// fn
 
+
+		/**
+		 * Create a poll
+		 * @param   {JSON} newPoll New poll's data
+		 * @returns {JSON} Error or poll just created
+		 */
 		function createPoll(newPoll) {
 			return $http.post('/polls/create', newPoll, service.authToken)
 				.success(function (poll) {
@@ -33,14 +39,23 @@
 				});
 		};
 
+		/**
+		 * Return current user's polls
+		 * @returns {Array} Poll array
+		 */
 		function getAll() {
 			return $http.get('/polls/', service.authToken)
 				.success(function (polls) {
 					angular.copy(polls, service.polls);
-					return polls;
+					//return polls;
 				});
 		};
 
+		/**
+		 * Delete poll
+		 * @param   {ObjectId} pollId Poll's id
+		 * @returns {JSON} Error or success message
+		 */
 		function deletePoll(pollId) {
 			return $http.delete('/polls/' + pollId, service.authToken)
 				.success(function () {
@@ -51,6 +66,11 @@
 				});
 		};
 
+		/**
+		 * Get specific poll
+		 * @param   {ObjectId} pollId Poll's id
+		 * @returns {JSON} Returns error message or poll
+		 */
 		function getPoll(pollId) {
 			return $http.get('/polls/' + pollId)
 				.success(function (poll) {
@@ -61,10 +81,20 @@
 				});
 		};
 
-		function votePoll(poll, optionVoteId) {
-			return $http.put('/polls/' + poll._id + '/vote/' + optionVoteId, null, service.authToken);
+		/**
+		 * Vote poll
+		 * @param   {ObjectId} pollId   Poll's id
+		 * @param   {ObjectId} optionVoteId   Option's id to vote
+		 * @returns {JSON} Error message or poll voted
+		 */
+		function votePoll(pollId, optionVoteId) {
+			return $http.put('/polls/' + pollId + '/vote/' + optionVoteId, null, service.authToken);
 		};
 
+		/**
+		 * Check if polls array is empty
+		 * @returns {boolean}
+		 */
 		function isEmpty() {
 			return service.polls.length === 0 ? true : false;
 		}

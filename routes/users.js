@@ -10,10 +10,6 @@ var auth = jwt({
 	userProperty: 'payload'
 });
 
-/*User.remove({}, function (err) {
-	console.log('collection removed')
-});*/
-
 // Register user
 router.post('/register', function (req, res, next) {
 

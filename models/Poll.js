@@ -9,7 +9,6 @@ var PollSchema = new mongoose.Schema({
 	date: Date,
 	name: String,
 	options: [{
-		//id: Number,
 		name: String,
 		option: String,
 		votes: {
@@ -28,16 +27,26 @@ var PollSchema = new mongoose.Schema({
 
 });
 
+/**
+ * Vote poll
+ * @param   {ObjectId} voterId  Voter's id
+ * @param   {ObjectId} optionId Option's id
+ * @param   {fn} callback Save method's parameter
+ */
+
 PollSchema.methods.vote = function (voterId, optionId, callback) {
 
-	var optionIndex = this.options.map(function (option) {
-		return option._id.toString();
-	}).indexOf(optionId.toString());
+	var optionIndex = this.options
+		.map(function (option) {
+			return option._id.toString();
+		})
+		.indexOf(optionId.toString());
 
 	this.options[optionIndex].votes += 1;
 	this.totalVotes += 1;
 	this.voters.push(voterId);
 	this.save(callback);
+
 };
 
 mongoose.model('Poll', PollSchema);

@@ -19,13 +19,6 @@
 				templateUrl: 'app/home/home.html',
 				controller: 'HomeCtrl',
 				controllerAs: 'home',
-				/*resolve: {
-	pollsPromise: ['polls', 'auth', function (polls) {
-		if (auth.isLoggedIn()) {
-			return polls.getAll();
-		}
-					}]
-}*/
 			})
 			.state('login', {
 				url: '/login',

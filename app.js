@@ -1,25 +1,29 @@
-//Enviroment vars
+// Enviroment vars
 process.env['SECRET'] = 'voting-app-jwt-auth';
+process.env['MONGO_URI'] = 'mongodb://localhost/votingApp';
 
+// Require
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
 var mongoose = require('mongoose');
 var passport = require('passport');
 require('./models/User');
 require('./models/Poll');
 require('./config/passport');
-mongoose.connect('mongodb://localhost/votingApp');
 
-//Routes
+// Connect to database
+mongoose.connect(process.env['MONGO_URI']);
+
+// Routes
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var polls = require('./routes/polls');
 
+// Setup app
 var app = express();
 
 // view engine setup

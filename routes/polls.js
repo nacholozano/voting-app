@@ -8,11 +8,7 @@ var auth = jwt({
 	userProperty: 'payload'
 });
 
-/*Poll.remove({}, function (err) {
-	console.log('collection removed')
-});*/
-
-// Get polls
+// Get user's polls
 router.get('/', auth, function (req, res, next) {
 
 	var polls = Poll.find({
@@ -43,13 +39,14 @@ router.get('/:poll', function (req, res, next) {
 
 });
 
-// Upvote
+// Vote poll
 router.put('/:poll/vote/:option', auth, function (req, res, next) {
 
 	req.poll.vote(req.payload._id, req.params.option, function (err, poll) {
 		if (err) {
 			return next(err);
 		}
+
 		res.json(poll);
 	});
 
@@ -88,8 +85,9 @@ router.delete('/:id', auth, function (req, res, next) {
 
 });
 
-/////////////////
+///////////////// Params
 
+// Poll param
 router.param('poll', function (req, res, next, id) {
 	var query = Poll.findById(id);
 

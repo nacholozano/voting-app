@@ -32,20 +32,11 @@
 			newPollForm.append($compile(newOption)($scope));
 
 			addOptionCounter++;
-			/*$scope.newPoll.options.push({
-				id: addOptionCounter
-			});*/
 		};
 
 		//	New poll
 		$scope.newPoll = {
-			options: [
-				/*{
-								id: 1
-							}, {
-								id: 2
-							}*/
-				]
+			options: []
 		};
 
 		$scope.createPoll = function () {
@@ -71,10 +62,6 @@
 		//	Filters
 		$scope.order = 'date';
 		$scope.search = '';
-		/*$scope.limit = 5;
-$scope.loadMore = function () {
-	$scope.limit += $scope.limit;
-};*/
 
 		//	My polls
 		polls.getAll();
