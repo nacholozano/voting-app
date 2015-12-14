@@ -1,6 +1,6 @@
 <div class="poll">
 
-	<div class="container">
+	<div ng-show='poll' class="container">
 
 		<h2>{{poll.name}}</h2>
 		<section ng-hide='pollVoted()' class="vote">
@@ -49,8 +49,36 @@
 
 		</section>
 
-		<button ng-show='isAuthor()' type='submit' class='btn btn-lg' ng-click='deletePoll(poll.id)'>Delete</button>
+		<button type="button" class="deleteButton btn btn-lg" data-toggle="modal" data-target="#modal">Delete</button>
 
+	</div>
+
+	<div ng-show='message' class="alert alert-dismissible alert-success">
+		<strong>{{message}}</strong>
+		<p> <a href="/#/home"> Go home -></a> </p>
+	</div>
+
+	<!-- Modal -->
+	<div id="modal" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+					<h4 class="modal-title">Delete poll</h4>
+				</div>
+
+				<div class="modal-body">
+					<p>Do you want delete the poll <span class=''>"{{ poll.name }}"</span> ? </p>
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button data-dismiss="modal" type="button" class="btn btn-danger" ng-click='deletePoll()'>Delete</button>
+				</div>
+
+			</div>
+		</div>
 	</div>
 
 </div>

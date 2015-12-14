@@ -10,9 +10,15 @@
 		$scope.poll = pollPromise.data;
 
 		// Delete poll
+
 		$scope.deletePoll = function () {
-			polls.deletePoll($scope.poll._id);
-			$state.go('home');
+			polls.deletePoll($scope.poll._id).success(function (message) {
+				//$state.go('home');
+				$scope.poll = '';
+				$scope.message = message.message;
+			}).error(function (error) {
+				$scope.error = error;
+			});
 		};
 
 		// Vote

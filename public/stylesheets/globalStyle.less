@@ -37,6 +37,9 @@ body {
 	flex-direction: column;
 	font-family: 'Lato';
 	color: black;
+	button {
+		outline: 0 !important;
+	}
 }
 
 main {
@@ -175,15 +178,23 @@ main {
 					color: @general-color;
 				}
 			}
-			button:not(.loadMore) {
+			button {
 				background-color: @deleteButton;
 				border: none;
 				outline: 0;
+				color: white;
+				padding: 4px 20px;
 			}
 		}
 		.loadDiv {
 			text-align: center;
 		}
+	}
+}
+
+.modal-body {
+	span {
+		font-size: 2rem;
 	}
 }
 
@@ -230,4 +241,16 @@ main {
 .form-group .radio label,
 .form-group label {
 	margin-bottom: 18px;
+}
+
+button.btn:not(.btn-raised).btn-danger,
+.info+.btn.btn-lg.deleteButton {
+	background-color: @deleteButton;
+	color: white;
+	&:hover {
+		background-color: @deleteButton - 50;
+	}
+	&:focus {
+		background-color: @deleteButton - 50;
+	}
 }
