@@ -1,0 +1,38 @@
+/* ----------------------------------------- FADE IN */
+
+@-webkit-keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+@keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+body,
+.settings,
+.register,
+.home,
+.welcome,
+.login,
+.dashboard,
+.alert,
+.noPolls,
+.formCreatePoll,
+.myPollsTable,
+.poll,
+.info {
+	-webkit-animation: fadeIn 0.7s infinite;
+	animation: fadeIn 0.7s infinite;
+	-webkit-animation-iteration-count: 1;
+	animation-iteration-count: 1;
+}

@@ -19,7 +19,6 @@
 			deletePoll: deletePoll,
 			getPoll: getPoll,
 			votePoll: votePoll,
-			isEmpty: isEmpty,
 		};
 
 		return service;
@@ -90,14 +89,6 @@
 		function votePoll(pollId, optionVoteId) {
 			return $http.put('/polls/' + pollId + '/vote/' + optionVoteId, null, service.authToken);
 		};
-
-		/**
-		 * Check if polls array is empty
-		 * @returns {boolean}
-		 */
-		function isEmpty() {
-			return service.polls.length === 0 ? true : false;
-		}
 
 	};
 

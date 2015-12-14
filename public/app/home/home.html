@@ -72,11 +72,12 @@
 					</div>
 				</section>
 
+
 				<!-- My polls -->
 
 				<section id="myPolls" ng-show='isSet("myPolls")'>
 
-					<div ng-hide='isEmpty()' class="myPollsTable">
+					<div ng-hide='myPolls.length === 0' class="myPollsTable">
 
 						<div class="row search">
 							<div class="col-md-4 col-md-offset-1 col-sm-4 col-sm-offset-1 col-xs-12">
@@ -115,23 +116,23 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr ng-repeat='poll in myPolls | orderBy: order | filter: search | limitTo: limit'>
+									<tr class='animate-repeat' ng-repeat='poll in myPolls | orderBy: order | filter: search'>
 										<td> <a ng-href="/#/polls/{{poll._id}}">{{poll.name}}</a> </td>
 										<td>{{poll.totalVotes}}</td>
 										<td>
-											<button ng-click='deletePoll(poll._id)'>Delete</button>
+											<!--<button ng-click='deletePoll(poll._id)'>Delete</button>-->
+											<!--<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#modal" ng-click='setDeleteId(poll._id,poll.name)'>Open Modal</button>-->
+											<button type="button" class="" data-toggle="modal" data-target="#modal" ng-click='setDeleteId(poll._id,poll.name)'>Delete</button>
 										</td>
 									</tr>
 								</tbody>
 							</table>
 
 						</div>
-						<!-- <div class="loadDiv">
-						<a href=' ' class="btn btn-lg loadMore">Load more</a>
-					</div> -->
+
 					</div>
 
-					<h3 ng-show='isEmpty()' class="noPolls">No polls</h3>
+					<h3 class="noPolls" ng-show='myPolls.length === 0'>No polls</h3>
 
 					<div ng-show='message' class="alert alert-dismissible alert-success">
 						<strong>{{message}}</strong>
@@ -147,6 +148,29 @@
 
 		</div>
 
+	</div>
+
+	<!-- Modal -->
+	<div id="modal" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+					<h4 class="modal-title">Delete poll</h4>
+				</div>
+
+				<div class="modal-body">
+					<p>Do you want delete the poll "{{ pollToDelete.name }}" </p>
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button data-dismiss="modal" type="button" class="btn" ng-click='deletePoll()'>Delete</button>
+				</div>
+
+			</div>
+		</div>
 	</div>
 
 </div>

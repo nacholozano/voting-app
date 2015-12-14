@@ -19,6 +19,9 @@
 		};
 		$scope.setTab = function (tab) {
 			$scope.tab = tab;
+			$scope.message = '';
+			$scope.poll = '';
+			$scope.error = '';
 		};
 
 		// Add option
@@ -49,7 +52,6 @@
 				})
 				.success(function (poll) {
 					$scope.poll = poll;
-					$scope.noPolls = false;
 				});
 
 			// Reset form
@@ -66,10 +68,17 @@
 		//	My polls
 		polls.getAll();
 		$scope.myPolls = polls.polls;
-		$scope.isEmpty = polls.isEmpty;
 
-		$scope.deletePoll = function (pollId) {
-			polls.deletePoll(pollId).success(function (message) {
+		// Delete poll
+		$scope.pollToDelete = {};
+
+		$scope.setDeleteId = function (id, name) {
+			$scope.pollToDelete._id = id;
+			$scope.pollToDelete.name = name;
+		};
+
+		$scope.deletePoll = function () {
+			polls.deletePoll($scope.pollToDelete._id).success(function (message) {
 				$scope.message = message.message;
 			}).error(function (error) {
 				$scope.error = error;
