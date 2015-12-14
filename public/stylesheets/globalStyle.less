@@ -171,6 +171,9 @@ main {
 			}
 			td {
 				padding: 15px 0;
+				a {
+					color: @general-color;
+				}
 			}
 			button:not(.loadMore) {
 				background-color: @deleteButton;
@@ -188,7 +191,7 @@ main {
 /* Poll */
 
 .vote {
-	margin-top: 40px;
+	margin-top: 70px;
 }
 
 .totalVotes,
@@ -222,4 +225,9 @@ main {
 	span {
 		margin-right: 3%;
 	}
+}
+
+.form-group .radio label,
+.form-group label {
+	margin-bottom: 18px;
 }

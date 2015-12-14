@@ -29,8 +29,6 @@
 
 		<section ng-show='pollVoted()' class="info">
 
-			<!--<h3>Percents</h3>-->
-
 			<div ng-repeat='option in poll.options | orderBy: "-votes" '>
 
 				<p class='optionPercent'>
