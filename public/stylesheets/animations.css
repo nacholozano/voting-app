@@ -31,8 +31,6 @@ body,
 .myPollsTable,
 .poll,
 .info {
-	-webkit-animation: fadeIn 0.7s infinite;
-	animation: fadeIn 0.7s infinite;
-	-webkit-animation-iteration-count: 1;
-	animation-iteration-count: 1;
+	-webkit-animation: fadeIn 0.7s 1;
+	animation: fadeIn 0.7s 1;
 }

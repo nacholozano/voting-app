@@ -60,7 +60,12 @@
 				controller: 'PollCtrl',
 				resolve: {
 					pollPromise: ['polls', '$stateParams', function (polls, $stateParams) {
-						return polls.getPoll($stateParams.poll);
+						return polls.getPoll($stateParams.poll)
+							.then(function (poll) {
+								return poll;
+							}, function (err) {
+								return err;
+							});
 					}]
 				}
 			});

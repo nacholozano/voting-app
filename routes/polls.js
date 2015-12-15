@@ -96,7 +96,10 @@ router.param('poll', function (req, res, next, id) {
 			return next(err);
 		}
 		if (!poll) {
-			return next(new Error('Cant find poll'))
+			//return next(new Error('Cant find poll'))
+			res.json({
+				error: "Can't find poll"
+			});
 		}
 		req.poll = poll;
 		return next();
