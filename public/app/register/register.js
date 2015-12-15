@@ -5,23 +5,24 @@
 
 	angular.module('votingApp')
 
-	.controller('RegisterCtrl', ['$state', 'auth', LoginCtrl]);
+	.controller('RegisterCtrl', ['$scope', '$state', 'auth', LoginCtrl]);
 
-	function LoginCtrl($state, auth) {
+	function LoginCtrl($scope, $state, auth) {
 
-		var vm = this;
+		$scope.user = {};
 
-		vm.user = {};
+		$scope.register = function () {
 
-		vm.register = function () {
-			auth.register(vm.user)
-				.error(function (err) {
-					vm.error = err;
-					vm.user.email = ''; // Incorrect email
-				})
-				.success(function () {
-					$state.go('home');
-				});
+			auth.register($scope.user)
+
+			.error(function (err) {
+				$scope.error = err;
+				$scope.user.email = ''; // Incorrect email
+			})
+
+			.success(function () {
+				$state.go('home');
+			});
 
 		};
 

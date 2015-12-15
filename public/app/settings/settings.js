@@ -1,28 +1,28 @@
 ;
 (function () {
+	'use strict';
+
 	angular.module('votingApp').
-	controller('SettingsCtrl', ['auth', SettingsCtrl]);
+	controller('SettingsCtrl', ['$scope', 'auth', SettingsCtrl]);
 
-	function SettingsCtrl(auth) {
+	function SettingsCtrl($scope, auth) {
 
-		var vm = this;
+		$scope.data = {};
 
-		vm.data = {};
+		$scope.update = function () {
 
-		vm.update = function () {
-
-			auth.update(vm.data)
+			auth.update($scope.data)
 				.error(function (error) {
-					vm.success = '';
-					vm.error = error;
-					if (vm.error.message === 'Incorrect current password') {
-						vm.data.currentPassword = '';
+					$scope.success = '';
+					$scope.error = error;
+					if ($scope.error.message === 'Incorrect current password') {
+						$scope.data.currentPassword = '';
 					}
 				})
 				.success(function (data) {
-					vm.error = '';
-					vm.success = data;
-					vm.data = {};
+					$scope.error = '';
+					$scope.success = data;
+					$scope.data = {};
 				});
 
 		};

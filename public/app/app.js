@@ -19,13 +19,11 @@
 				url: '/home',
 				templateUrl: 'app/home/home.html',
 				controller: 'HomeCtrl',
-				controllerAs: 'home',
 			})
 			.state('login', {
 				url: '/login',
 				templateUrl: 'app/login/login.html',
 				controller: 'LoginCtrl',
-				controllerAs: 'login',
 				onEnter: ['$state', 'auth', function ($state, auth) {
 					if (auth.isLoggedIn()) {
 						$state.go('home');
@@ -36,7 +34,6 @@
 				url: '/register',
 				templateUrl: 'app/register/register.html',
 				controller: 'RegisterCtrl',
-				controllerAs: 'register',
 				onEnter: ['$state', 'auth', function ($state, auth) {
 					if (auth.isLoggedIn()) {
 						$state.go('home');
@@ -47,7 +44,6 @@
 				url: '/settings',
 				templateUrl: 'app/settings/settings.html',
 				controller: 'SettingsCtrl',
-				controllerAs: 'settings',
 				onEnter: ['$state', 'auth', function ($state, auth) {
 					if (!auth.isLoggedIn()) {
 						$state.go('home');

@@ -5,27 +5,28 @@
 
 	angular.module('votingApp')
 
-	.controller('LoginCtrl', ['$state', 'auth', LoginCtrl]);
+	.controller('LoginCtrl', ['$scope', '$state', 'auth', LoginCtrl]);
 
-	function LoginCtrl($state, auth) {
+	function LoginCtrl($scope, $state, auth) {
 
-		var vm = this;
+		$scope.user = {};
 
-		vm.user = {};
+		$scope.login = function () {
 
-		vm.login = function () {
-			auth.login(vm.user)
-				.error(function (err) {
-					vm.error = err;
-					if (vm.error.message === 'Incorrect password') {
-						vm.user.password = ''; // Incorrect password
-					} else {
-						vm.user.email = ''; // Incorrect email
-					}
-				})
-				.success(function () {
-					$state.go('home');
-				});
+			auth.login($scope.user)
+
+			.error(function (err) {
+				$scope.error = err;
+				if ($scope.error.message === 'Incorrect password') {
+					$scope.user.password = ''; // Incorrect password
+				} else {
+					$scope.user.email = ''; // Incorrect email
+				}
+			})
+
+			.success(function () {
+				$state.go('home');
+			});
 
 		};
 
