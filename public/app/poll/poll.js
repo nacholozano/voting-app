@@ -15,7 +15,7 @@
 				$scope.poll = '';
 				$scope.message = message.message;
 			}).error(function (error) {
-				$scope.error = error;
+				$scope.error = error.message;
 			});
 		};
 
@@ -25,7 +25,7 @@
 		$scope.votePoll = function () {
 			polls.votePoll($scope.poll._id, $scope.optionVoteId)
 				.error(function (error) {
-					$scope.error = error;
+					$scope.error = error.message;
 				}).success(function (poll) {
 					$scope.poll = poll;
 				});

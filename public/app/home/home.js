@@ -48,7 +48,7 @@
 
 			polls.createPoll($scope.newPoll)
 				.error(function (error) {
-					$scope.error = error;
+					$scope.error = error.message;
 				})
 				.success(function (poll) {
 					$scope.poll = poll;
@@ -81,7 +81,7 @@
 			polls.deletePoll($scope.pollToDelete._id).success(function (message) {
 				$scope.message = message.message;
 			}).error(function (error) {
-				$scope.error = error;
+				$scope.error = error.message;
 			});
 		};
 

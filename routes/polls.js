@@ -44,7 +44,10 @@ router.put('/:poll/vote/:option', auth, function (req, res, next) {
 
 	req.poll.vote(req.payload._id, req.params.option, function (err, poll) {
 		if (err) {
-			return next(err);
+			res.json({
+				message: "Can't vote poll"
+			});
+			return;
 		}
 
 		res.json(poll);
@@ -60,7 +63,10 @@ router.post('/create', auth, function (req, res, next) {
 
 	poll.save(function (err, poll) {
 		if (err) {
-			return next(err);
+			res.json({
+				message: "Can't create poll"
+			});
+			return;
 		}
 
 		res.json(poll);
@@ -76,7 +82,10 @@ router.delete('/:id', auth, function (req, res, next) {
 		_id: req.params.id
 	}, function (err, removed) {
 		if (err) {
-			return next(err);
+			res.json({
+				message: "Error deleting poll"
+			});
+			return;
 		}
 		res.json({
 			message: 'Poll deleted'
@@ -96,10 +105,10 @@ router.param('poll', function (req, res, next, id) {
 			return next(err);
 		}
 		if (!poll) {
-			//return next(new Error('Cant find poll'))
 			res.json({
 				error: "Can't find poll"
 			});
+			return next();
 		}
 		req.poll = poll;
 		return next();
