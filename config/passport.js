@@ -1,7 +1,10 @@
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+var TwitterStrategy = require('passport-twitter').Strategy;
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
+
+//Local
 
 passport.use(new LocalStrategy({
 		usernameField: 'email',
@@ -30,3 +33,16 @@ passport.use(new LocalStrategy({
 		});
 	}
 ));
+
+
+// Twitter
+
+passport.use(new TwitterStrategy({
+	consumerKey: 'MeMxvTO2YTM9dI2UWRGdyN5KY',
+	consumerSecret: 'hIWYmoXnBFqxSCghzVDQK7XAIkQid61OaumK6HQUJrSNkar0Zc',
+	callbackURL: 'https://votapp.herokuapp.com/login/twitter/return'
+}, function (token, tokenSecret, profile, done) {
+	//process.nextTick(function () {
+	return done(null, profile);
+	//});
+}));
