@@ -11,4 +11,7 @@ LESS
 <b> Session </b>
 
 Email: nacholozanogui@gmail.com <br>
-Password: nacho
+Password: nacho <br>
+
+<br>
+You can try it here: [Voting App](https://votapp.herokuapp.com/#/home)
