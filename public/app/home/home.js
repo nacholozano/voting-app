@@ -62,7 +62,7 @@
 		};
 
 		//	Filters
-		$scope.order = 'date';
+		$scope.order = '-date';
 		$scope.search = '';
 
 		//	My polls

@@ -96,7 +96,7 @@
 									<label for="orderBy" class="control-label">Order by</label>
 									<div>
 										<select ng-model='order' id="orderBy" class="form-control">
-											<option value="date">Newest first</option>
+											<option value="-date">Newest first</option>
 											<option value="-totalVotes">Total votes</option>
 										</select>
 									</div>
@@ -119,6 +119,7 @@
 									<tr class='animate-repeat' ng-repeat='poll in myPolls | orderBy: order | filter: search'>
 										<td> <a ng-href="/#/polls/{{::poll._id}}">{{::poll.name}}</a> </td>
 										<td>{{::poll.totalVotes}}</td>
+										<td>{{::poll.date}}</td>
 										<td>
 											<button type="button" class="" data-toggle="modal" data-target="#modal" ng-click='setDeleteId(poll._id,poll.name)'>Delete</button>
 										</td>

@@ -14,9 +14,9 @@ router.get('/', auth, function (req, res, next) {
 	var polls = Poll.find({
 			author: req.payload._id
 		})
-		.sort({
-			date: -1
-		});
+		/*.sort({
+	date: 1
+})*/;
 
 	polls.exec(function (err, polls) {
 		if (err) {
@@ -78,7 +78,7 @@ router.post('/create', auth, function (req, res, next) {
 // Delete poll
 router.delete('/:id', auth, function (req, res, next) {
 
-	var poll = Poll.remove({
+	Poll.remove({
 		_id: req.params.id
 	}, function (err, removed) {
 		if (err) {
@@ -88,8 +88,9 @@ router.delete('/:id', auth, function (req, res, next) {
 			return;
 		}
 		res.json({
-			message: 'Poll deleted'
+			message: "Poll deleted"
 		});
+
 	});
 
 });
@@ -110,6 +111,7 @@ router.param('poll', function (req, res, next, id) {
 			});
 			return next();
 		}
+
 		req.poll = poll;
 		return next();
 	});

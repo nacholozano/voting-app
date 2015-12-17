@@ -47,17 +47,6 @@ app.use('/', routes);
 app.use('/user', users);
 app.use('/polls', polls);
 
-app.get('/login/twitter',
-	passport.authenticate('twitter'));
-
-app.get('/login/twitter/return',
-	passport.authenticate('twitter', {
-		failureRedirect: '/user/login'
-	}),
-	function (req, res) {
-		res.redirect('/');
-	});
-
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
 	var err = new Error('Not Found');
