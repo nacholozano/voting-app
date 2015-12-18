@@ -14,9 +14,12 @@ router.get('/', auth, function (req, res, next) {
 	var polls = Poll.find({
 			author: req.payload._id
 		})
-		/*.sort({
-	date: 1
-})*/;
+		.select({
+			name: 1,
+			date: 1,
+			totalVotes: 1,
+			_id: 1,
+		});
 
 	polls.exec(function (err, polls) {
 		if (err) {
@@ -99,6 +102,7 @@ router.delete('/:id', auth, function (req, res, next) {
 
 // Poll param
 router.param('poll', function (req, res, next, id) {
+
 	var query = Poll.findById(id);
 
 	query.exec(function (err, poll) {
