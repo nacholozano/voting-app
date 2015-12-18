@@ -43,6 +43,14 @@
 			return $scope.poll.author.toString() === auth.currentUser()._id.toString();
 		};
 
+		$scope.isLoggedIn = auth.isLoggedIn;
+
+		// Show poll if user is logged in and poll has been retrieved successfully
+		$scope.showPoll = function () {
+			console.log($scope.isLoggedIn() && !$scope.poll.error);
+			return $scope.isLoggedIn() && !$scope.poll.error;
+		};
+
 	};
 
 })();

@@ -1,8 +1,39 @@
 <div class="poll">
 
-	<div ng-show='poll' ng-hide='poll.error' class="container">
+	<!--Error retrieving poll-->
+	<div ng-show='poll.error' class="alert alert-dismissible alert-danger">
+		<strong>{{poll.error}}</strong>
+		<p><a href="/#/home">Go home</a></p>
+	</div>
+
+	<!--Error deleting or voting the poll-->
+	<div ng-show='error' class="alert alert-dismissible alert-danger">
+		<strong>{{error}}</strong>
+	</div>
+
+	<!--Success deleting poll-->
+	<div ng-show='message' class="alert alert-dismissible alert-success">
+		<strong>{{message}}</strong>
+		<p> <a href="/#/home"> Go home </a> </p>
+	</div>
+
+	<!--Check if user is logged in-->
+	<div ng-hide='isLoggedIn()' class="alert alert-dismissible alert-success">
+		<strong>You should be logged in to vote</strong>
+		<br>
+		<br>
+		<p>
+			<a href="/#/login"> Go login </a>
+			<br>
+			<a href="/#/register"> Go register </a>
+		</p>
+	</div>
+
+	<div ng-show='showPoll()' class="container">
 
 		<h2>{{::poll.name}}</h2>
+
+		<!--Options-->
 		<section ng-hide='pollVoted()' class="vote">
 
 			<form ng-submit='votePoll()'>
@@ -27,6 +58,7 @@
 
 		</section>
 
+		<!--Current result-->
 		<section ng-show='pollVoted()' class="info">
 
 			<div ng-repeat='option in poll.options | orderBy: "-votes" '>
@@ -53,20 +85,6 @@
 
 	</div>
 
-	<div ng-show='poll.error' class="alert alert-dismissible alert-danger">
-		<strong>{{poll.error}}</strong>
-		<p><a href="/#/home">Go home</a></p>
-	</div>
-
-	<div ng-show='error' class="alert alert-dismissible alert-danger">
-		<strong>{{poll.error}}</strong>
-		<p><a href="/#/home">{{error}}</a></p>
-	</div>
-
-	<div ng-show='message' class="alert alert-dismissible alert-success">
-		<strong>{{message}}</strong>
-		<p> <a href="/#/home"> Go home </a> </p>
-	</div>
 
 	<!-- Modal -->
 	<div id="modal" class="modal fade" role="dialog">

@@ -55,7 +55,7 @@
 				templateUrl: 'app/poll/poll.html',
 				controller: 'PollCtrl',
 				resolve: {
-					pollPromise: ['polls', '$stateParams', function (polls, $stateParams) {
+					pollPromise: ['polls', '$stateParams', 'auth', function (polls, $stateParams, auth) {
 						return polls.getPoll($stateParams.poll)
 							.then(function (poll) {
 								return poll;
@@ -65,7 +65,6 @@
 					}]
 				}
 			});
-
 
 		$urlRouterProvider.otherwise('home');
 
