@@ -2,8 +2,8 @@
 (function () {
 	'use strict';
 
-	angular.module('votingApp')
-		.controller('SettingsCtrl', ['$scope', 'auth', SettingsCtrl]);
+	angular.module('votingApp').
+	controller('SettingsCtrl', ['$scope', 'auth', SettingsCtrl]);
 
 	function SettingsCtrl($scope, auth) {
 

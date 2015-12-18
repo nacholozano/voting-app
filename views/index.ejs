@@ -9,8 +9,7 @@
 	<header ng-include src="'/app/header/header.html'"></header>
 
 	<!-- router -->
-	<my-loading></my-loading>
-	<main ng-if='!isRouteLoading' ui-view></main>
+	<main ui-view></main>
 
 	<!-- Footer -->
 	<footer ng-include src="'/app/footer/footer.html'"></footer>
@@ -20,9 +19,6 @@
 
 	<!-- Bootstrap -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-
-	<!-- Font awesome -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
 	<!-- Arrive -->
 	<script src="libraries/arrive.min.js"></script>
@@ -46,7 +42,6 @@
 	<script src='/app/register/register.js'></script>
 	<script src='/app/header/header.js'></script>
 	<script src='/app/settings/settings.js'></script>
-	<script src='/directives/loading/loading.js'></script>
 
 	<script>
 		$(document).ready(function () {
