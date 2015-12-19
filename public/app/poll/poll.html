@@ -49,10 +49,11 @@
 
 		</section>
 
-		<button type="button" class="deleteButton btn btn-lg" data-toggle="modal" data-target="#modal">Delete</button>
+		<button ng-show='isAuthor()' type="button" class="deleteButton btn btn-lg" data-toggle="modal" data-target="#modal">Delete</button>
 
 	</div>
 
+	<!--Messages-->
 	<div ng-show='poll.error' class="alert alert-dismissible alert-danger">
 		<strong>{{poll.error}}</strong>
 		<p><a href="/#/home">Go home</a></p>
