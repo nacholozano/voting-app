@@ -12,6 +12,10 @@
 		// Auth control
 		$scope.isLoggedIn = auth.isLoggedIn;
 
+		//	Get polls
+		polls.getAll();
+		$scope.myPolls = polls.polls;
+
 		// Tabs
 		$scope.tab = 'newPoll';
 		$scope.isSet = function (tab) {
@@ -36,6 +40,7 @@
 
 			addOptionCounter++;
 		};
+
 
 		//	New poll
 		$scope.newPoll = {
@@ -64,10 +69,6 @@
 		//	Filters
 		$scope.order = '-date';
 		$scope.search = '';
-
-		//	My polls
-		polls.getAll();
-		$scope.myPolls = polls.polls;
 
 		// Delete poll
 		$scope.pollToDelete = {};

@@ -9,7 +9,12 @@
 	<header ng-include src="'/app/header/header.html'"></header>
 
 	<!-- router -->
-	<main ui-view></main>
+	<main ng-hide="stateIsLoading" ui-view></main>
+	<main ng-show='stateIsLoading'>
+		<div class="loading">
+			<i class="fa fa-circle-o-notch fa-spin"></i>
+		</div>
+	</main>
 
 	<!-- Footer -->
 	<footer ng-include src="'/app/footer/footer.html'"></footer>
@@ -33,15 +38,16 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.10/angular-ui-router.js"></script>
 
 	<!-- Scripts  -->
-	<script src="/app/app.js"></script>
-	<script src="/factories/polls.js"></script>
-	<script src="/factories/auth.js"></script>
-	<script src='/app/poll/poll.js'></script>
-	<script src='/app/home/home.js'></script>
-	<script src='/app/login/login.js'></script>
-	<script src='/app/register/register.js'></script>
-	<script src='/app/header/header.js'></script>
-	<script src='/app/settings/settings.js'></script>
+	<script type="text/javascript" src="/app/app.js"></script>
+	<script type="text/javascript" src="/factories/polls.js"></script>
+	<script type="text/javascript" src="/factories/auth.js"></script>
+	<script type="text/javascript" src='/app/poll/poll.js'></script>
+	<script type="text/javascript" src='/app/home/home.js'></script>
+	<script type="text/javascript" src='/app/login/login.js'></script>
+	<script type="text/javascript" src='/app/register/register.js'></script>
+	<script type="text/javascript" src='/app/header/header.js'></script>
+	<script type="text/javascript" src='/app/settings/settings.js'></script>
+	<!--<script type="text/javascript" src='/directives/loading/loading.js'></script>-->
 
 	<script>
 		$(document).ready(function () {

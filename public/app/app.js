@@ -11,7 +11,20 @@
     '$stateProvider',
     '$urlRouterProvider',
 		routing
-]);
+	])
+
+	.run(['$rootScope', '$state', function ($rootScope, $state, $timeout) {
+
+		$rootScope.$on('$stateChangeStart', function () {
+			$rootScope.stateIsLoading = true;
+		});
+
+
+		$rootScope.$on('$stateChangeSuccess', function () {
+			$rootScope.stateIsLoading = false;
+		});
+
+	}]);
 
 	function routing($stateProvider, $urlRouterProvider) {
 		$stateProvider
