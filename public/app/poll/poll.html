@@ -1,6 +1,7 @@
 <div class="poll">
 
-	<div ng-show='poll' ng-hide='poll.error' class="container">
+	<div ng-show='showPoll()' class="container">
+		<!--<div ng-show='poll' ng-hide='poll.error' class="container">-->
 
 		<h2>{{::poll.name}}</h2>
 		<section ng-hide='pollVoted()' class="vote">
@@ -67,6 +68,13 @@
 	<div ng-show='message' class="alert alert-dismissible alert-success">
 		<strong>{{message}}</strong>
 		<p> <a href="/#/home"> Go home </a> </p>
+	</div>
+
+	<div ng-show='!isLoggedIn()' class="alert alert-dismissible alert-success">
+		<strong>You must be logged in to vote</strong>
+		<br>
+		<p> <a href="/#/login"> Go login </a> </p>
+		<p> <a href="/#/register"> Go register </a> </p>
 	</div>
 
 	<!-- Modal -->

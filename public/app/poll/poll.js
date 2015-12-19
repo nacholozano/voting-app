@@ -7,6 +7,7 @@
 
 	function PollCtrl($scope, auth, $state, $stateParams, polls, pollPromise) {
 
+		// Data
 		$scope.poll = pollPromise.data;
 
 		// Delete poll
@@ -41,6 +42,14 @@
 		/// chekc if current user is poll author
 		$scope.isAuthor = function () {
 			return $scope.poll.author.toString() === auth.currentUser()._id.toString();
+		};
+
+		// Auth control
+		$scope.isLoggedIn = auth.isLoggedIn;
+
+		// Show poll or not
+		$scope.showPoll = function () {
+			return !$scope.poll.error && !$scope.message;
 		};
 
 	};
